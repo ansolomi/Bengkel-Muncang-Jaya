@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+<style>
+</style>
     <meta charset="utf-8">
     <title>HomePage Bengkel</title>
     <link rel="stylesheet" href="theme3.css" />  
@@ -13,12 +15,18 @@
 <body>
 
 <form class = "container">
-    <a class="page-header">INI HOMEPAGE NYA, KLIK ADD DULU GAN</a><br><br>
-
+    <div class="card bg-dark text-white">
+	<div class="card-body">
+	<center><h1 class="display-4">Inventory<br>Bengkel Anjai</h1></center>
+	</div>
+	</div>
+	<br><br>
+	
 <form class = "button">
-
-    <a href="insert_own.php" class="button">Add New Item</a><br><br>
-    <a href="view.php" class="btn">View Test</a> 
+	<center><div class ="btn">
+    <a href="insert_own.php" class="btn btn-primary btn-lg "><font size='6'>Add New Item</font></a><br><br>
+    <a href="view.php" class="btn btn-default btn-lg"><font size='6'>View Test</font></a> 
+	</div></center>
           
 </body>
 </html>
