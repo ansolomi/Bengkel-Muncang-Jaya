@@ -13,9 +13,13 @@
 .nav{
   position: relative;
 }
-  #right-panel-link {
+  #left-panel-link {
   position: absolute;
   margin-left: 9.5%;
+}
+  #right-panel-link {
+  position: absolute;
+  right: 9.5%;
 }
 
 </style>
@@ -41,7 +45,7 @@
 require_once 'config.php';
 ?>
 
-    <nav class="nav nav-pills" id = "right-panel-link">
+    <nav class="nav nav-pills" id = "left-panel-link">
         <a href="index.php" class="nav-item nav-link active">
             <i class="fa fa-home" ></i> Home
         </a>
@@ -51,6 +55,11 @@ require_once 'config.php';
             <i class="fa fa-pencil-square-o" ></i> Insert
         </a>
 	</nav>
+
+    <form action="view.php" class="search-box" id = "right-panel-link" method="get">
+      <input class="search-txt" type="text" name="search_param" placeholders="Search in list">
+      <input type="submit" value="Go">
+    </form>
 
 <br>
 <div class="container">
@@ -67,20 +76,33 @@ require_once 'config.php';
 	</thead>
 
   <?php 
+  if(isset($_GET['search_param']))
+  {
+    $search=$_GET['search_param'];
+    echo "<b>Results for ".$search."</b>";
+  }
+
   $halaman = 10;
   $page = isset($_GET["halaman"]) ? (int)$_GET["halaman"] : 1;
   $mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
   $result = pg_query("SELECT * FROM spareparts");
   $total = pg_num_rows($result);
-  $pages = ceil($total/$halaman);            
-  $query = pg_query("select * from spareparts LIMIT $halaman OFFSET $mulai")or die(error);
+  $pages = ceil($total/$halaman);
   $no =$mulai+1;
 
+  if (isset($_GET['search_param']))
+  {
+    $search=$_GET['search_param'];
+    $query = pg_query("select * from spareparts WHERE merk LIKE '%".$search."%'")or die(error);
+    
+  }
+  else
+  {
+  $query = pg_query("select * from spareparts LIMIT $halaman OFFSET $mulai")or die(error);
+  }
 
   while ($data = pg_fetch_assoc($query)) {
     ?>
-
-
     <tr>
       <td><?php echo $no++; ?></td>                  
       <td><?php echo $data['jenis']; ?></td>
@@ -88,10 +110,8 @@ require_once 'config.php';
       <td><?php echo $data['tipe']; ?></td>
       <td><?php echo "Rp.".$data['harga']; ?></td>              
     </tr>
-
-
     <?php               
-  } 
+  }
   ?>
   </table>
 </div>
