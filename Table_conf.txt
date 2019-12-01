@@ -1,7 +1,0 @@
-CREATE TABLE riwayat_servis(
-id SERIAL,
-serial_id INT,
-nama_barang VARCHAR(50),
-merk_barang VARCHAR(50),
-harga INT,
-stock INT );
