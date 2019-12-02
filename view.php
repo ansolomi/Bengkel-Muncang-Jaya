@@ -56,10 +56,10 @@ require_once 'config.php';
         </a>
 	</nav>
 
-    <form action="view.php" class="search-box" id = "right-panel-link" method="get">
-      <input class="search-txt" type="text" name="search_param" placeholders="Search in list">
+    <form action="search.php" class="search-box" id = "right-panel-link" method="get">
+      <input class="search-btn" type="text" name="search_param" placeholders="Search in list">
       <input type="submit" value="Go">
-    </form>
+</form>
 
 <br>
 <div class="container">
