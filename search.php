@@ -54,14 +54,35 @@ require_once 'config.php';
         <a href="insert_own.php" class="nav-item nav-link active">
             <i class="fa fa-pencil-square-o" ></i> Insert
         </a>
+
 	</nav>
 
-    <form action="search.php" class="search-box" id = "right-panel-link" method="get">
-      <input class="search-btn" type="text" name="search_param" placeholders="Search in list">
+
+
+   <form action="search.php" class="search-box" id = "right-panel-link" method="get">
+      <div class="md-form mt-0">
+	  <input class="form-control" type="text" name="search_param" placeholders="Search in list">
       <input type="submit" value="Go">
+	  </div>
 </form>
 
+	<div class="dropdown" id="right-panel-link">
+		<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+		Search By
+		</button>
+			<div class="dropdown-menu" name="dd_opt">
+				<a class="dropdown-item" value="jenis">Jenis</a>
+				<a class="dropdown-item" value="name">Name</a>
+				<a class="dropdown-item" value="brand">Merek</a>
+				<a class="dropdown-item" value="type">Tipe</a>
+				<a class="dropdown-item" value="price">Harga</a>
+			</div>
+	</div>
 <br>
+<?php
+
+		
+?>
 <div class="container">
 <table class="table table-hover">
 <br>
