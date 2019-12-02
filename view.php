@@ -22,6 +22,11 @@
   right: 9.5%;
 }
 
+.md-form
+{
+	position: relative;
+}
+
 </style>
 
 <head>
@@ -45,6 +50,7 @@
 require_once 'config.php';
 ?>
 
+	
     <nav class="nav nav-pills" id = "left-panel-link">
         <a href="index.php" class="nav-item nav-link active">
             <i class="fa fa-home" ></i> Home
@@ -57,8 +63,24 @@ require_once 'config.php';
 	</nav>
 
     <form action="search.php" class="search-box" id = "right-panel-link" method="get">
-      <input class="search-btn" type="text" name="search_param" placeholders="Search in list">
+      <div class="md-form mt-0">
+	  <input class="form-control" type="text" name="search_param" placeholders="Search in list">
       <input type="submit" value="Go">
+	  </div>
+	  
+	<div class="dropdown" id="right-panel-link">
+		<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+		Search By
+		</button>
+			<div class="dropdown-menu" name="dd_opt">
+				<a class="dropdown-item" value="jenis">Jenis</a>
+				<a class="dropdown-item" value="name">Name</a>
+				<a class="dropdown-item" value="brand">Merek</a>
+				<a class="dropdown-item" value="type">Tipe</a>
+				<a class="dropdown-item" value="price">Harga</a>
+			</div>
+	</div>
+
 </form>
 
 <br>
@@ -81,7 +103,6 @@ require_once 'config.php';
     $search=$_GET['search_param'];
     echo "<b>Results for ".$search."</b>";
   }
-
   $halaman = 10;
   $page = isset($_GET["halaman"]) ? (int)$_GET["halaman"] : 1;
   $mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
@@ -89,7 +110,6 @@ require_once 'config.php';
   $total = pg_num_rows($result);
   $pages = ceil($total/$halaman);
   $no =$mulai+1;
-
   if (isset($_GET['search_param']))
   {
     $search=$_GET['search_param'];
@@ -100,7 +120,6 @@ require_once 'config.php';
   {
   $query = pg_query("select * from spareparts LIMIT $halaman OFFSET $mulai")or die(error);
   }
-
   while ($data = pg_fetch_assoc($query)) {
     ?>
     <tr>
