@@ -109,8 +109,15 @@ require_once 'config.php';
     //$select_by = 'jenis';
     $select_by = $_POST["dd_opt"];
     $search=$_POST["search_param"];
-    $query = pg_query("select * from spareparts WHERE ".$select_by." LIKE '%".$search."%'")or die(error);
-
+    if($select_by == 'id' OR $select_by == 'harga')
+    {
+      $query = pg_query("select * from spareparts WHERE ".$select_by." = ".$search."")or die(error); 
+    }
+    else
+    {
+      $query = pg_query("select * from spareparts WHERE ".$select_by." LIKE '%".$search."%'")or die(error);
+    }
+    
   while ($data = pg_fetch_assoc($query)) {
     ?>
     <tr>
