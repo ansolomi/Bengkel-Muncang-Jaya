@@ -81,7 +81,7 @@ require_once 'config.php';
 		</div>
 		&nbsp;&nbsp;
 		<div class"col">
-			<input class="form-control" type="text" name="search_param" placeholders="Search in list">
+			<input class="form-control" type="text" name="search_param" placeholder="Search in list">
 		</div>
 		&nbsp;&nbsp;
 		<div class"col">
