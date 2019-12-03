@@ -52,23 +52,31 @@ require_once 'config.php';
 </nav>
 
 <form action="search.php" class="search-box" id = "right-panel-link" method="post">
-  <div class="md-form mt-0">
-  <form class="dropdown" id="right-panel-link" action="test_filter.php" method="post">
-			<select name="dd_opt">
-      <option value="id">ID</option>
-				<option value="jenis">Jenis</option>
-				<option value="merk">Merk</option>
-				<option value="tipe">Tipe</option>
-				<option value="harga">Harga</option>
-			</select>
-
-    <input class="form" type="text" name="search_param" placeholders="Search in list">
-    <input type="submit" name="submit" class="btn btn-info" value="Go">
+  <div class="form-row">
+	  <div class"col">
+		  <form class="dropdown" id="right-panel-link" action="test_filter.php" method="post">
+					<select class="form-control" name="dd_opt">
+						<option value="id">ID</option>
+						<option value="jenis">Jenis</option>
+						<option value="merk">Merk</option>
+						<option value="tipe">Tipe</option>
+						<option value="harga">Harga</option>
+					</select>
+		</div>
+		&nbsp;&nbsp;
+		<div class"col">
+			<input class="form-control" type="text" name="search_param" placeholders="Search in list">
+		</div>
+		&nbsp;&nbsp;
+		<div class"col">
+			<input type="submit" name="submit" class="btn btn-info" value="Go">
+		</div>
+	
   </div>
-  </form>
-
+		</form>
 </form>
 
+<br>
 <br>
 <div class="container">
 <table class="table table-hover">
