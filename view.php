@@ -110,7 +110,14 @@ require_once 'config.php';
   if (isset($_GET['search_param']))
   {
     $search=$_GET['search_param'];
-    $query = pg_query("select * from spareparts WHERE ".$search_by." LIKE '%".$search."%'")or die(error);
+      if($select_by == 'id' OR $select_by == 'harga')
+      {
+        $query = pg_query("select * from spareparts WHERE ".$select_by." = ".$search."")or die(error); 
+      }
+      else
+      {
+        $query = pg_query("select * from spareparts WHERE ".$select_by." LIKE '%".$search."%'")or die(error);
+      }
     
   }
   else
