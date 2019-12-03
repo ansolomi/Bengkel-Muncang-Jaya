@@ -55,29 +55,33 @@ require_once 'config.php';
             <i class="fa fa-pencil-square-o" ></i> Insert
         </a>
 
-	</nav>
+    </nav>
+    
+    <nav class="nav nav-pills" id = "left-panel-link">
+        <a href="index.php" class="nav-item nav-link active">
+          <i class="fa fa-home" ></i> Home
+        </a>&nbsp;&nbsp;
 
+        <a href="insert_own.php" class="nav-item nav-link active">
+          <i class="fa fa-pencil-square-o" ></i> Insert
+        </a>
+    </nav>
 
+<form action="search.php" class="search-box" id = "right-panel-link" method="post">
+  <div class="md-form mt-0">
+  <form class="dropdown" id="right-panel-link" action="test_filter.php" method="post">
+			<select name="dd_opt">
+      <option value="id">ID</option>
+				<option value="jenis">Jenis</option>
+				<option value="merk">Merk</option>
+				<option value="tipe">Tipe</option>
+				<option value="harga">Harga</option>
+			</select>
 
-   <form action="search.php" class="search-box" id = "right-panel-link" method="get">
-      <div class="md-form mt-0">
-	  <input class="form-control" type="text" name="search_param" placeholders="Search in list">
-      <input type="submit" value="Go">
-	  </div>
-</form>
-
-	<div class="dropdown" id="right-panel-link">
-		<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
-		Search By
-		</button>
-			<div class="dropdown-menu" name="dd_opt">
-				<a class="dropdown-item" value="jenis">Jenis</a>
-				<a class="dropdown-item" value="name">Name</a>
-				<a class="dropdown-item" value="brand">Merek</a>
-				<a class="dropdown-item" value="type">Tipe</a>
-				<a class="dropdown-item" value="price">Harga</a>
-			</div>
-	</div>
+    <input class="form" type="text" name="search_param" placeholders="Search in list">
+    <input type="submit" name="submit" class="btn btn-info" value="Go">
+  </div>
+  </form>
 <br>
 <?php
 
@@ -97,14 +101,15 @@ require_once 'config.php';
 	</thead>
 
   <?php 
-  if(isset($_GET['search_param']))
+  if(isset($_POST['search_param']))
   {
-    $search=$_GET['search_param'];
+    $search=$_POST['search_param'];
     echo "<b>Results for ".$search."</b>";
   }
-
-    $search=$_GET['search_param'];
-    $query = pg_query("select * from spareparts WHERE merk LIKE '%".$search."%'")or die(error);
+    //$select_by = 'jenis';
+    $select_by = $_POST["dd_opt"];
+    $search=$_POST["search_param"];
+    $query = pg_query("select * from spareparts WHERE ".$select_by." LIKE '%".$search."%'")or die(error);
 
   while ($data = pg_fetch_assoc($query)) {
     ?>
