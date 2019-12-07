@@ -15,8 +15,10 @@
     <title>HomePage Bengkel</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="theme3.css" />  
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <br>
 </head>
 <body>
@@ -30,7 +32,55 @@
  <br><br>
 </div>
 
-<center>
+
+<div class="container">
+
+	<ul class="nav nav-pills justify-content-center" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active mx-auto" data-toggle="pill" href="#home_menu">Home</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link mx-auto" data-toggle="pill" href="#update_menu">Update</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link mx-auto" data-toggle="pill" href="#compatibility_menu">Compatibility</a>
+		</li>
+	</ul>
+
+
+	<div class="tab-content">
+		<div id="home_menu" class="container tab-pane active"><br>
+			<form class = "button">
+			  <center><div class ="btn">
+			  <a href="view.php" class="btn btn-dark btn-lg"><font size='5'>View Inventory</font></a> 
+			  </div></center>
+			</form> 
+		</div>
+		
+		<div id="update_menu" class="container tab-pane fade"><br>
+			<form class = "button">
+			  <center><div class ="btn">
+				  <a href="insert_own.php" class="btn btn-dark btn-lg "><font size='5'>Add New Item</font></a><br><br>
+				  <a href="#" class="btn btn-dark btn-lg"><font size='5'>Delete Item</font></a><br><br>
+				  <a href="#" class="btn btn-dark btn-lg"><font size='5'>Sale Today</font></a>
+			  </div></center>
+			</form> 
+		</div>
+		
+		<div id="compatibility_menu" class="container tab-pane fade"><br>
+			<form class = "button">
+				<center><div class ="btn">
+					<a href="insert_own.php" class="btn btn-dark btn-lg "><font size='5'>Compatibility List</font></a><br><br>
+				</div></center>
+			</form> 
+		</div>
+		
+	</div>
+</div>
+
+
+
+<!--<center>
   <button class="w3-bar-item btn btn-outline-primary" onclick="openCity('London')">Home</button>
   <button class="w3-bar-item btn btn-outline-primary" onclick="openCity('Paris')">Update</button>
   <button class="w3-bar-item btn btn-outline-primary" onclick="openCity('Tokyo')">Compatibility</button>
@@ -63,7 +113,7 @@
   <a href="insert_own.php" class="btn btn-dark btn-lg "><font size='5'>Compatibility List</font></a><br><br>
   </div></center>
  </form> 
-</div>
+</div>!-->
 
 <b id="logout"><a href="logout.php" class="btn btn-dark btn-lg"><font size='5'>Log Out</font></a>
 
