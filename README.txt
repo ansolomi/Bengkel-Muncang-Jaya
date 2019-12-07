@@ -35,6 +35,7 @@ UPDATE 12/8/2019:   --Ikhsan Firdauz--
 
 <home>
   Tabs button changed
+  logout icon added
   
 <insert_own>
   notification submit fixed
