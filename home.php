@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="theme3.css" />  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -115,7 +116,9 @@
  </form> 
 </div>!-->
 
-<b id="logout"><a href="logout.php" class="btn btn-dark btn-lg"><font size='5'>Log Out</font></a>
+<b id="logout"><a href="logout.php" class="btn btn-dark btn-lg"><font size='5'> <i class="fa fa-power-off" ></i> Log Out</font></a>
+
+
 
 <script>
 function openCity(cityName) {
