@@ -9,11 +9,12 @@
   left: 17px;
   top: 5px;
   }
+
 </style>
     <meta charset="utf-8">
     <title>HomePage Bengkel</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="theme.css" />  
+    <link rel="stylesheet" href="theme3.css" />  
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <br>
@@ -23,16 +24,16 @@
 <div class = "w3-container">
     <div class="card bg-dark text-white">
  <div class="card-body">
- <center><h1 class="display-4">Inventory<br>Bengkel Anjai</h1></center>
+ <center><h1 class="display-4">Inventory<br>Bengkel Tenonet</h1></center>
  </div>
  </div>
  <br><br>
 </div>
 
 <center>
-  <button class="w3-bar-item w3-button" onclick="openCity('London')">Home</button>
-  <button class="w3-bar-item w3-button" onclick="openCity('Paris')">Update</button>
-  <button class="w3-bar-item w3-button" onclick="openCity('Tokyo')">Compatibility</button>
+  <button class="w3-bar-item btn btn-outline-primary" onclick="openCity('London')">Home</button>
+  <button class="w3-bar-item btn btn-outline-primary" onclick="openCity('Paris')">Update</button>
+  <button class="w3-bar-item btn btn-outline-primary" onclick="openCity('Tokyo')">Compatibility</button>
 </center>
 
 <div id="London" class="w3-container city">
