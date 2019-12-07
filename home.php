@@ -116,7 +116,7 @@
  </form> 
 </div>!-->
 
-<b id="logout"><a href="logout.php" class="btn btn-dark btn-lg"><font size='5'> <i class="fa fa-power-off" ></i> Log Out</font></a>
+<b id="logout"><a href="logout.php" class="btn btn-secondary btn-lg"><font size='5'> <i class="fa fa-power-off" ></i> Log Out</font></a>
 
 
 
