@@ -36,12 +36,12 @@ UPDATE 12/8/2019:   --Ikhsan Firdauz--
 <home>
   Tabs button changed
   
-  
 <insert_own>
   notification submit fixed
   failed insert notification yet (someone pls)
   changed finish button
-
+  form length fixed
+  
 pls update your home.php and insert_own.php
 
 *note to genta : "theme3.css nya mana file gambar backgroundnya kaga diaplot anjai"
