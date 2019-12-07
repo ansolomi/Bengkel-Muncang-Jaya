@@ -2,8 +2,8 @@
 >Import proyek.sql ke postgres
 >Config.php jangan lupa diset sebelum nge-test
 
-
-UPDATE 12/4/2019:
+-------------------------------------------------------------------------
+UPDATE 12/4/2019:     --gentot--
 
 <Login>
   Buat table baru di DB PostgreSQL, pake query ini:
@@ -29,4 +29,22 @@ UPDATE 12/4/2019:
     - session.php
     - login.php
     - logout.php
+
+-------------------------------------------------------------------------
+UPDATE 12/8/2019:   --Ikhsan Firdauz--
+
+<home>
+  Tabs button changed
+  
+  
+<insert_own>
+  notification submit fixed
+  failed insert notification yet (someone pls)
+  changed finish button
+
+pls update your home.php and insert_own.php
+
+*note to genta : "theme3.css nya mana file gambar backgroundnya kaga diaplot anjai"
+
+------------------------------------------------------------------------
 
