@@ -85,5 +85,29 @@ UPDATE 12/8/2019  --Gentot--
     
   Mangad gays!!
   
-  --------------------------------------------------------------------------------------------------------------------------------------
+<EDIT>
+  
+  > File SQL udah di upload, silahkan di import ke DB masing2. Nama DB yang dibuat disarankan 'sbdtest' (bebas sih, gw resek aja). 
+    
+<VIEWS>
+  > Detail View:
+  
+    1) jumlah_merk:
+	  CREATE VIEW public.jumlah_merk AS
+ 	  SELECT count(list.id_merk) AS count,
+    list.id_merk
+    FROM public.list
+ 	  GROUP BY list.id_merk;
+    
+    2) brand_count:
+    CREATE VIEW public.brand_count AS
+    SELECT merk.no,
+    merk.nama_merk,
+    merk.kode_merk,
+    jumlah_merk.count,
+    jumlah_merk.id_merk
+    FROM (public.merk
+    LEFT JOIN public.jumlah_merk ON (((merk.kode_merk)::text = (jumlah_merk.id_merk)::text)));
+  
+  Dah w mau bobok (-, – )…zzzZZZ --------------------------------------------------------------------------------------------------------------------------------------
     
