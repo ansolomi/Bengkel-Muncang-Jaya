@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <title>HomePage Bengkel</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="theme3.css" />  
+    <link rel="stylesheet" href="theme.css" />  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -53,7 +53,8 @@
 		<div id="home_menu" class="container tab-pane active"><br>
 			<form class = "button">
 			  <center><div class ="btn">
-			  <a href="view.php" class="btn btn-dark btn-lg"><font size='5'>View Inventory</font></a> 
+			  <a href="view_list.php" class="btn btn-dark btn-lg"><font size='5'>View Complete List</font></a><br><br>
+        <a href="view_brand.php" class="btn btn-dark btn-lg"><font size='5'>View Brand List</font></a><br><br> 
 			  </div></center>
 			</form> 
 		</div>
@@ -61,8 +62,8 @@
 		<div id="update_menu" class="container tab-pane fade"><br>
 			<form class = "button">
 			  <center><div class ="btn">
-				  <a href="insert_own.php" class="btn btn-dark btn-lg "><font size='5'>Add New Item</font></a><br><br>
-				  <a href="#" class="btn btn-dark btn-lg"><font size='5'>Delete Item</font></a><br><br>
+          <a href="insert_own.php" class="btn btn-dark btn-lg "><font size='5'>Add New Item</font></a><br><br>
+          <a href="delete.php" class="btn btn-dark btn-lg"><font size='5'>Delete Item</font></a><br><br>
 				  <a href="#" class="btn btn-dark btn-lg"><font size='5'>Sale Today</font></a>
 			  </div></center>
 			</form> 
@@ -71,15 +72,13 @@
 		<div id="compatibility_menu" class="container tab-pane fade"><br>
 			<form class = "button">
 				<center><div class ="btn">
-					<a href="insert_own.php" class="btn btn-dark btn-lg "><font size='5'>Compatibility List</font></a><br><br>
+					<a href="view_compat.php" class="btn btn-dark btn-lg "><font size='5'>Compatibility List</font></a><br><br>
 				</div></center>
 			</form> 
 		</div>
 		
 	</div>
 </div>
-
-
 
 <!--<center>
   <button class="w3-bar-item btn btn-outline-primary" onclick="openCity('London')">Home</button>
