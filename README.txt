@@ -49,3 +49,41 @@ pls update your home.php and insert_own.php
 
 ------------------------------------------------------------------------
 
+UPDATE 12/8/2019  --Gentot--
+
+<Renaming and Re-mapping>
+  > File 'view.php' dan 'search.php' di hapus
+  > Banyak dibuat perubahan pada SQL Server, Lagi di usahakn untuk export .sql nya. Sebelum di upload, BANYAK FITUR YANG BELUM BISA DIGUNAKAN
+  
+  <home>
+    > Ditambahin button baru, 'View Brand'
+    > Update, Delete, Compatibility button sudah bisa digunakan. Harap tunggu .sql file di upload untuk digunakan secara maksimal. Sabar ya sekali lagi anjing
+    
+  <Login/Logout>
+    > Isu bisa masuk tanpa login dengan 'back' button sudah di address, harusnya udah gk masalah.....I hope....god please...
+    
+  <New Files>
+    Banyak banget, gw skim aja:
+    
+    -Views-
+      > view_brand.php: File untuk view merk, kode merk, dan jumlah barang per merk yang ada di toko
+      > view_compat.php: Buat liat compatibility. masih harus di address lagi, ktn kyknya blm optimal table-nya
+      > view_list.php: Tadinya view.php, gk ada yg baru, just renamed. Deal with it.
+
+    -Searchs-
+      > search_brand: Buat cari Brand. Bisa di search berdasarkan brand, Kode brand, atau nomor urut di list (BUKAN ID)
+      > search_compat: Buat cari compatibility spareparts. Bisa di cari berdasarkan Jenis, Merk, atau jenis kendaraan 
+      > search_list: Tadinya search.php, search dari view_list.php. Nothing new either, cuz I'm fuckin tired
+    
+    -Delete-
+      > Udah bisa delete di database. Tunggu .sql file di upload untuk bisa pake secara maksimal (kl gk sabar edit aje phpnya ya anjing)
+      > Fitur baru, perlu feedback
+      
+  <Future Notes>
+    > Perlu perbaikan di Query, dan dinamika insert_own.php, karena jumlah table sudah bertambah, begtu juga jumlah relasi & view
+    > Kalo insert_own udah rapih, harusnya proyek sudah 90% kelar. 
+    
+  Mangad gays!!
+  
+  --------------------------------------------------------------------------------------------------------------------------------------
+    
