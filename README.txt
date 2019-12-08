@@ -87,7 +87,8 @@ UPDATE 12/8/2019  --Gentot--
   
 <EDIT>
   
-  > File SQL udah di upload, silahkan di import ke DB masing2. Nama DB yang dibuat disarankan 'sbdtest' (bebas sih, gw resek aja). 
+  > File SQL udah di upload, silahkan di import ke DB masing2. Nama DB yang dibuat disarankan 'sbdtest' (bebas sih, gw resek aja).
+  > Jgn lupa donlot file csv nya, taro di C:\
     
 <VIEWS>
   > Detail View:
