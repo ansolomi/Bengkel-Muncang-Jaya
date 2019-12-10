@@ -1,5 +1,5 @@
 <?php
-  require('login.php');
+  session_start();
   if(isset($_SESSION['login_user']))
  {?>
 
@@ -96,14 +96,14 @@ require_once 'config.php';
   if(isset($_POST['search_param']))
   {
     $search=$_POST['search_param'];
-    echo "<b>Results for ".$search."</b>";
+    echo "<b>Results for ".$search." </b>";
   }
     //$select_by = 'jenis';
     $select_by = $_POST["dd_opt"];
     $search=$_POST["search_param"];
     if($select_by == 'id' OR $select_by == 'harga')
     {
-      $query = pg_query("select * from spareparts WHERE ".$select_by." = ".$search."")or die(error); 
+      $query = @pg_query("select * from spareparts WHERE ".$select_by." = ".$search."")or @die(error); 
     }
     else
     {
