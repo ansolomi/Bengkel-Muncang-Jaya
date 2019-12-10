@@ -116,7 +116,7 @@ require_once 'config.php';
 
     if($select_by == 'id')
      {
-      $query = pg_query("select id,merk,jenis,tipe from spareparts WHERE ".$select_by." = ".$search." ORDER BY jenis ASC")or die(error); 
+      $query = @pg_query("select id,merk,jenis,tipe from spareparts WHERE ".$select_by." = ".$search." ORDER BY jenis ASC")or @die(Error); 
     }
     else
     {
