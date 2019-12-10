@@ -116,11 +116,11 @@ require_once 'config.php';
 
       if($select_by == 'id' OR $select_by == 'harga')
       {
-        $query = pg_query("select no,nama_merk,kode_merk,count from brand_count WHERE ".$select_by." = ".$search." ")or die(error); 
+        $query = @pg_query("select no,nama_merk,kode_merk,count from brand_count WHERE ".$select_by." = ".$search." ")or @die(error); 
       }
       else
       {
-        $query = pg_query("select no,nama_merk,kode_merk,count from brand_count WHERE ".$select_by." LIKE '%".$search."%'")or die(error);
+        $query = @pg_query("select no,nama_merk,kode_merk,count from brand_count WHERE ".$select_by." LIKE '%".$search."%'")or @die(error);
       }
   while ($data = pg_fetch_assoc($query)) {
     ?>
