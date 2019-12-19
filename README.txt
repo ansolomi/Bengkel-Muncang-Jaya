@@ -112,3 +112,50 @@ UPDATE 12/8/2019  --Gentot--
   
   Dah w mau bobok (-, – )…zzzZZZ --------------------------------------------------------------------------------------------------------------------------------------
     
+UPDATE 12/19/2019  --Gentot--
+    
+*INTERNET LAGi DOWN, MOHON MAAF KALAU BANYAK BUG DAN ERROR, REFERENSI CUMAN SEADANYA*
+    
+<Re-mapping & Fixes>
+    >File 'home.php' diupdate button 'Sale Today', langsung nyambung ke 'sale.php'.
+    >Sedikit fix di 'delete.php','delete_conf.php' dan 'delete_fix.php'.
+    
+<New Files>
+*PERHATIAN. BACA YANG BENER JGN SAMPE KOMPLEN*
+Buat file-file baru, perlu perubahan, penambahan dan revisi file csv untuk di import ke database (detail di bagian <notes>. Untuk sementara, pakai query ini di DB masing-masing:
+
+CREATE TABLE test_stock(
+id SERIAL,
+merk VARCHAR(255),
+nama VARCHAR(255),
+stock INT NOT NULL);
+
+INSERT INTO test_stock (merk,nama,stock) VALUES
+('Yamaha','Shock Breaker','3'),
+('Honda','Lampu Depan','20'),
+('Honda','Lampu Belakang','12'),
+('Suzuki','Kaburator','2');
+
+*PERHATIAN ABIS (Kyk gw sm Au**...)*
+
+    >ada 3 file baru:
+    	1)sale.php
+	  Main page buat ngejual barang. Masukkin nama, merk, sama jumlah yang mau dijual berapa.
+	2)sale_conf.php
+	  Page untuk konfirmasi detail barang yang mau dijual, termasuk stock dan berapa jumlah yang mau dijual.
+	3)sale_fix.php
+	  Intisari sale, detail proses dan error handling transaction dari sale.php
+	  
+<Notes>
+
+   >Buat file csv, perlu ditambahkan detail jumlah stock yang tersedia untuk setiap barang.
+   >Perlu Trigger di beberpa table Postgre
+   >Table harus di Normalisasi lagi, setelah terjadi revisi
+   >Re-mapping dan revisi code terhadap 3 perubahan diatas.
+   
+KALAU 4 notes diatas sudah selesai, projeck ini harusnya sudah OK, alias kelar. Semangat gays
+
+--------------------------------------------------------------------------------------------------------------------------------------
+ 
+	
+
