@@ -64,7 +64,7 @@
 			  <center><div class ="btn">
           <a href="insert_own.php" class="btn btn-dark btn-lg "><font size='5'>Add New Item</font></a><br><br>
           <a href="delete.php" class="btn btn-dark btn-lg"><font size='5'>Delete Item</font></a><br><br>
-				  <a href="#" class="btn btn-dark btn-lg"><font size='5'>Sale Today</font></a>
+				  <a href="sale.php" class="btn btn-dark btn-lg"><font size='5'>Sale Today</font></a>
 			  </div></center>
 			</form> 
 		</div>
