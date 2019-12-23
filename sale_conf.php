@@ -1,5 +1,6 @@
 <?php
 require_once "config.php";
+@session_start();
 $nama = $_POST['iNama'];
 $merk = $_POST['iMerk'];
 $jumlah = $_POST['iJumlah'];
@@ -25,7 +26,6 @@ $_SESSION['jumlah'] = $jumlah;
 ?>
 
 <?php
-  require('login.php');
   if(isset($_SESSION['login_user']))
  {?>
 
