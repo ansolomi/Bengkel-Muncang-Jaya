@@ -19,10 +19,11 @@ $prep1 = pg_execute($link,"reduce",array());
 $prep2 = pg_execute($link,"check",array());
 $data = pg_fetch_assoc($prep2);
 
-if ($data['stock'] <= 0 )
+if ($data['stock'] < 0 )
     {
+    pg_query("ROLLBACK") or die("ROLLBACK failed\n");
     echo ("<script>
-    alert('Transaksi Gagal, karena STOCK TIDAK ADA. Harap cek transaksi kembali!');
+    alert('Transaksi Gagal, karena STOCK TIDAK ADA/HABIS. Harap cek transaksi kembali!');
     window.location.href='sale.php';
     </script>");
     }
