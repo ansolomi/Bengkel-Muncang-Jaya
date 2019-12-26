@@ -70,6 +70,7 @@ $_SESSION['jumlah'] = $jumlah;
 			<th>ID</th>
 			<th>Merk</th>
 			<th>Nama</th>
+			<th>Tipe</th>
 			<th>Stock</th>                         
 		 </tr>
 	</thead>
