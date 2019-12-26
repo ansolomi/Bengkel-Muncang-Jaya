@@ -170,5 +170,18 @@ Update:
 Query:
 CREATE VIEW complete_spareparts AS SELECT sp.id_tipe, sp.jenis, sp.merk, sp.tipe, sp.harga, sp.tanggal_input, st.stock FROM spareparts sp FULL JOIN stock st ON sp.id_tipe = st.id_tipe;
 
+--------------------------------------------------------------------------------------------------------------------------------------
+UPDATE 12/27/2019	--ican--
+
+Fixed: 
+typo on search_list column name (harga >< tanggal_input kebalik)
+search_motor.php salah nama referensi page (search_brand.php -> search_motor.php)
+
+Update:
+>added 'insert_barang.php'				//ini buat form insert barang
+>added 'insert_motor.php'				//ini buat form insert motor jadi dipisah
+>semua file csv di zip					//csv data awal
+>SQL inisiasi database 'SQL_database.txt'		//SQL awal
+
 
 
