@@ -1,0 +1,51 @@
+CREATE SEQUENCE id_tipe
+INCREMENT 1
+MINVALUE 5001
+MAXVALUE 929844903
+START 5001
+CACHE 1;
+
+CREATE SEQUENCE id_motor
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 5000
+START 1
+CACHE 1;
+
+CREATE TABLE spareparts(
+id_tipe INT DEFAULT NEXTVAL('id_tipe') PRIMARY KEY,
+jenis VARCHAR(255) NOT NULL,
+merk VARCHAR(255) NOT NULL,
+tipe VARCHAR(255) NOT NULL,
+harga INT NOT NULL,
+tanggal_input TIMESTAMP(0) DEFAULT current_timestamp);
+
+CREATE TABLE stock(
+id_tipe INT REFERENCES spareparts(id_tipe),
+stock INT NOT NULL);
+
+CREATE TABLE list_motor(
+id_motor INT DEFAULT NEXTVAL('id_motor') PRIMARY KEY,
+nama_motor VARCHAR(255));
+
+CREATE TABLE compatibility(
+id_tipe INT REFERENCES spareparts(id_tipe),
+jenis VARCHAR (255) NOT NULL,
+tipe VARCHAR (255) NOT NULL,
+nama_motor VARCHAR (255) NOT NULL,
+id_motor INT REFERENCES list_motor(id_motor));
+
+
+\COPY spareparts (jenis, merk, tipe, harga) FROM 'C:\users\ikhsan f\desktop\bengkel.csv' DELIMITER ',' CSV HEADER;
+\COPY list_motor (nama_motor) FROM 'C:\users\ikhsan f\desktop\motor.csv' DELIMITER ',' CSV HEADER;
+\COPY compatibility FROM 'C:\users\ikhsan f\desktop\compatibility.csv' DELIMITER ',' CSV HEADER;
+\COPY stock FROM 'C:\users\ikhsan f\desktop\stock.csv' DELIMITER ',' CSV HEADER;
+
+CREATE VIEW complete_spareparts AS SELECT sp.id_tipe, sp.jenis, sp.merk, sp.tipe, sp.harga, sp.tanggal_input, st.stock FROM spareparts sp FULL JOIN stock st ON sp.id_tipe = st.id_tipe;
+
+fix
+typo on search_list (harga >< tanggal input kebalik)
+search motor salah nama referensi page (search_brand.php -> search_motor.php)
+
+INSERT INTO test (id_tipe, id_motor)
+SELECT id_tipe FROM 
