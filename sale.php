@@ -50,7 +50,7 @@ $jumlah = $id = '';
         <br><br><br>
 		<div class="form-group">
         <label for="iid">ID Spareparts  :</label>
-        <input name = "iid" type="number" class="form-control mb-3 col-5" placeholder="Ketik Merk Barang Disini...">
+        <input name = "iid" type="number" class="form-control mb-3 col-5" placeholder="Ketik ID Barang Disini...">
     </div>
     <center>
 
