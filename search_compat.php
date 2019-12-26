@@ -1,5 +1,5 @@
 <?php
-  require('login.php');
+  session_start();
   if(isset($_SESSION['login_user']))
  {?>
 
@@ -60,11 +60,11 @@ require_once 'config.php';
   <div class="form-row">
 	  <div class"col">
 		  <form class="dropdown" id="right-panel-link" action="test_filter.php" method="post">
-					<select class="form-control" name="dd_opt">
-						<option value="id">No.ID</option>
-            <option value="merk">Merk</option>
+      <select class="form-control" name="dd_opt">
+						<option value="id_tipe">ID Spareparts</option>
 						<option value="jenis">Jenis</option>
-						<option value="tipe">Tipe</option>
+            <option value="tipe">Tipe</option>
+            <option value="nama_motor">Nama Motor</option>
 					</select>
 		</div>
 		&nbsp;&nbsp;
@@ -86,12 +86,12 @@ require_once 'config.php';
 <div class="container">
 <table class="table table-hover">
 <br>
-	<thead>
+<thead>
 		<tr>
 			<th>ID</th>
-            <th>Jenis</th>
-            <th>Merk</th>
-            <th>Tipe</th>                     
+			<th>Jenis</th>
+      <th>Tipe</th>                     
+      <th>Nama Motor</th>
 		 </tr>
 	</thead>
 
@@ -114,22 +114,22 @@ require_once 'config.php';
   $select_by = $_POST["dd_opt"];
   $search=$_POST["search_param"];
 
-    if($select_by == 'id')
+    if($select_by == 'id_tipe')
      {
-      $query = @pg_query("select id,merk,jenis,tipe from spareparts WHERE ".$select_by." = ".$search." ORDER BY jenis ASC")or @die(Error); 
+      $query = @pg_query("select id_tipe,jenis,tipe,nama_motor from compatibility WHERE ".$select_by." = ".$search." ORDER BY jenis ASC")or die(error); 
     }
     else
     {
-      $query = pg_query("select id,merk,jenis,tipe from spareparts WHERE ".$select_by." LIKE '%".$search."%' ORDER BY jenis ASC")or die(error);
+      $query = @pg_query("select id_tipe,jenis,tipe,nama_motor from compatibility WHERE ".$select_by." LIKE '%".$search."%' ORDER BY jenis ASC")or die(error);
     }
 
   while ($data = pg_fetch_assoc($query)) {
     ?>
     <tr>
-      <td><?php echo $data['id']; ?></td>                  
+      <td><?php echo $data['id_tipe']; ?></td>                  
       <td><?php echo $data['jenis']; ?></td>
-      <td><?php echo $data['merk']; ?></td>
-      <td><?php echo $data['tipe']; ?></td>            
+      <td><?php echo $data['tipe']; ?></td>
+      <td><?php echo $data['nama_motor']; ?></td>            
     </tr>
     <?php               
   }
