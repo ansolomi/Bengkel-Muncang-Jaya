@@ -1,7 +1,7 @@
 <?php
 require_once "config.php";
 $posted = false;
-$jenis = $merk = '';
+$jumlah = $id = '';
 
 // if($_SERVER["REQUEST_METHOD"] == "POST"){
 //     try 
@@ -49,8 +49,8 @@ $jenis = $merk = '';
     <div class="md-form">
         <br><br><br>
 		<div class="form-group">
-        <label for="iid">Merk Sparepart   :</label>
-        <input name = "iMerk" type="text" class="form-control mb-3 col-5" placeholder="Ketik Merk Barang Disini...">
+        <label for="iid">ID Spareparts  :</label>
+        <input name = "iid" type="number" class="form-control mb-3 col-5" placeholder="Ketik Merk Barang Disini...">
     </div>
     <center>
 
@@ -58,17 +58,8 @@ $jenis = $merk = '';
     <div class="md-form">
         <br>
 		<div class="form-group">
-        <label for="iid">Nama Sparepart   :</label>
-        <input name = "iNama" type="text" class="form-control mb-3 col-5" placeholder="Ketik Nama Barang Disini...">
-    </div>
-    <center>
-
-    <center>
-    <div class="md-form">
-        <br>
-		<div class="form-group">
-        <label for="iid">Jumlah  :</label>
-        <input name = "iJumlah" type="text" class="form-control mb-3 col-5" placeholder="Ketik Jumlah yang dijual...">
+        <label for="iJumlah">Jumlah  :</label>
+        <input name = "iJumlah" type="number" class="form-control mb-3 col-5" placeholder="Ketik Jumlah yang dijual...">
     </div>
     <center>
  
