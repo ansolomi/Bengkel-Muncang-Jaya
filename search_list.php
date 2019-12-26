@@ -54,11 +54,13 @@ require_once 'config.php';
 	  <div class"col">
 		  <form class="dropdown" id="right-panel-link" action="test_filter.php" method="post">
 					<select class="form-control" name="dd_opt">
-						<option value="id">ID</option>
+						<option value="id_tipe">ID</option>
 						<option value="jenis">Jenis</option>
 						<option value="merk">Merk</option>
 						<option value="tipe">Tipe</option>
-						<option value="harga">Harga</option>
+            <option value="harga">Harga</option>
+            <option value="stock">Stock</option>
+            <option value="tanggal_input">Tanggal Input</option>
 					</select>
 		</div>
 		&nbsp;&nbsp;
@@ -88,7 +90,9 @@ require_once 'config.php';
 			<th>Jenis</th>
 			<th>Merk</th>
 			<th>Tipe</th>
-			<th>Harga</th>                         
+      <th>Harga</th>   
+      <th>Stock</th>                         
+      <th>Tanggal Input</th>                         
 		 </tr>
 	</thead>
 
@@ -98,26 +102,27 @@ require_once 'config.php';
     $search=$_POST['search_param'];
     echo "<b>Results for ".$search." </b>";
   }
-    //$select_by = 'jenis';
     $select_by = $_POST["dd_opt"];
     $search=$_POST["search_param"];
-    if($select_by == 'id' OR $select_by == 'harga')
+    if($select_by == 'id_tipe' OR $select_by == 'harga')
     {
-      $query = @pg_query("select * from spareparts WHERE ".$select_by." = ".$search."")or @die(error); 
+      $query = @pg_query("select * from complete_spareparts WHERE ".$select_by." = ".$search."")or @die(error); 
     }
     else
     {
-      $query = pg_query("select * from spareparts WHERE ".$select_by." LIKE '%".$search."%'")or die(error);
+      $query = pg_query("select * from complete_spareparts WHERE ".$select_by." LIKE '%".$search."%'")or die(error);
     }
     
   while ($data = pg_fetch_assoc($query)) {
     ?>
     <tr>
-      <td><?php echo $data['id']; ?></td>                  
+      <td><?php echo $data['id_tipe']; ?></td>                  
       <td><?php echo $data['jenis']; ?></td>
       <td><?php echo $data['merk']; ?></td>
       <td><?php echo $data['tipe']; ?></td>
-      <td><?php echo "Rp.".$data['harga']; ?></td>              
+      <td><?php echo $data['tanggal_input']; ?></td> 
+      <td><?php echo $data['stock']; ?></td>   
+      <td><?php echo "Rp.".$data['harga']; ?></td>                   
     </tr>
     <?php               
   }
@@ -125,6 +130,11 @@ require_once 'config.php';
   </table>
 </div>
 
+<nav class="nav nav-pills" id = "left-panel-link">
+    <a href="view_list.php" class="nav-item nav-link active">
+        <i class="fa fa-arrow-left" ></i> Return to View
+    </a>
+</nav>
 <nav class="nav nav-pills" id = "left-panel-link">
     <a href="view_list.php" class="nav-item nav-link active">
         <i class="fa fa-arrow-left" ></i> Return to View
