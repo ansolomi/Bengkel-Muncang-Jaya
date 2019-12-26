@@ -1,5 +1,5 @@
 <?php
-  require('login.php');
+  session_start();
   if(isset($_SESSION['login_user']))
  {?>
 
@@ -56,15 +56,13 @@ require_once 'config.php';
   </a>
 </nav>
 
-<form action="search.php" class="search-box" id = "right-panel-link" method="post">
+<form action="search_brand.php" class="search-box" id ="right-panel-link" method="post">
   <div class="form-row">
 	  <div class"col">
 		  <form class="dropdown" id="right-panel-link" action="test_filter.php" method="post">
 					<select class="form-control" name="dd_opt">
-						<option value="no">Nomor</option>
-						<option value="nama_merk">Nama Merk</option>
-						<option value="kode_merk">Kode Merk</option>
-						<option value="count">Jumlah Barang</option>
+						<option value="id_motor">ID Motor</option>
+						<option value="nama_motor">Nama Motor</option>
 					</select>
 		</div>
 		&nbsp;&nbsp;
@@ -88,10 +86,8 @@ require_once 'config.php';
 <br>
 	<thead>
 		<tr>
-			<th>Nomor</th>
-			<th>Nama Merk</th>
-			<th>Kode Merk</th>
-			<th>Jumlah Barang</th>                    
+			<th>ID Motor</th>
+			<th>Nama Motor</th>                   
 		 </tr>
 	</thead>
 
@@ -108,27 +104,25 @@ require_once 'config.php';
     echo "<b>Results for ".$search_by."</b>";
   }
   else{
-    $search_by='nama_merk';
+    $search_by='nama_motor';
   }
 
   $select_by = $_POST["dd_opt"];
   $search=$_POST['search_param'];
 
-      if($select_by == 'id' OR $select_by == 'harga')
+      if($select_by == 'id_motor')
       {
-        $query = @pg_query("select no,nama_merk,kode_merk,count from brand_count WHERE ".$select_by." = ".$search." ")or @die(error); 
+        $query = pg_query("SELECT * FROM list_motor WHERE ".$select_by." = ".$search."")or die(error); 
       }
       else
       {
-        $query = @pg_query("select no,nama_merk,kode_merk,count from brand_count WHERE ".$select_by." LIKE '%".$search."%'")or @die(error);
+        $query = pg_query("SELECT * FROM list_motor WHERE ".$select_by." LIKE '%".$search."%'")or die(error);
       }
   while ($data = pg_fetch_assoc($query)) {
     ?>
-    <tr>
-      <td><?php echo $data['no']; ?></td>                  
-      <td><?php echo $data['nama_merk']; ?></td>
-      <td><?php echo $data['kode_merk']; ?></td>
-      <td><?php echo $data['count']; ?></td>           
+    <tr>                 
+      <td><?php echo $data['id_motor']; ?></td>
+      <td><?php echo $data['nama_motor']; ?></td>
     </tr>
     <?php               
   }
@@ -136,7 +130,7 @@ require_once 'config.php';
   </table>
 </div>
 <nav class="nav nav-pills" id = "left-panel-link">
-    <a href="view_brand.php" class="nav-item nav-link active">
+    <a href="view_motor.php" class="nav-item nav-link active">
         <i class="fa fa-arrow-left" ></i> Return to View
 </html>
   <?php }
