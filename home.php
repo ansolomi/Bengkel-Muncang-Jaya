@@ -54,7 +54,7 @@
 			<form class = "button">
 			  <center><div class ="btn">
 			  <a href="view_list.php" class="btn btn-dark btn-lg"><font size='5'>View Complete List</font></a><br><br>
-        <a href="view_brand.php" class="btn btn-dark btn-lg"><font size='5'>View Brand List</font></a><br><br> 
+        <a href="view_motor.php" class="btn btn-dark btn-lg"><font size='5'>View Bike List</font></a><br><br> 
 			  </div></center>
 			</form> 
 		</div>
@@ -79,41 +79,6 @@
 		
 	</div>
 </div>
-
-<!--<center>
-  <button class="w3-bar-item btn btn-outline-primary" onclick="openCity('London')">Home</button>
-  <button class="w3-bar-item btn btn-outline-primary" onclick="openCity('Paris')">Update</button>
-  <button class="w3-bar-item btn btn-outline-primary" onclick="openCity('Tokyo')">Compatibility</button>
-</center>
-
-<div id="London" class="w3-container city">
-<br><br>
- <form class = "button">
-  <center><div class ="btn">
-  <a href="view.php" class="btn btn-dark btn-lg"><font size='5'>View Inventory</font></a> 
-  </div></center>
- </form> 
-</div>
-
-<div id="Paris" class="w3-container city" style="display:none">
-<br><br>
-  <form class = "button">
-  <center><div class ="btn">
-  <a href="insert_own.php" class="btn btn-dark btn-lg "><font size='5'>Add New Item</font></a><br><br>
-  <a href="#" class="btn btn-dark btn-lg"><font size='5'>Delete Item</font></a><br><br>
-  <a href="#" class="btn btn-dark btn-lg"><font size='5'>Sale Today</font></a>
-  </div></center>
- </form> 
-</div>
-
-<div id="Tokyo" class="w3-container city" style="display:none">
-<br><br>
-   <form class = "button">
-  <center><div class ="btn">
-  <a href="insert_own.php" class="btn btn-dark btn-lg "><font size='5'>Compatibility List</font></a><br><br>
-  </div></center>
- </form> 
-</div>!-->
 
 <b id="logout"><a href="logout.php" class="btn btn-secondary btn-lg"><font size='5'> <i class="fa fa-power-off" ></i> Log Out</font></a>
 
