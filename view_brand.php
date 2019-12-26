@@ -1,5 +1,5 @@
 <?php
-  require('login.php');
+  session_start();
   if(isset($_SESSION['login_user']))
  {?>
 
@@ -29,7 +29,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>View Data Spareparts</title>
+    <title>View List Motor</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -51,20 +51,18 @@ require_once 'config.php';
     <i class="fa fa-home" ></i> Home
   </a>&nbsp;&nbsp;
 
-  <a href="insert_own.php" class="nav-item nav-link active">
+  <a href="#" class="nav-item nav-link active">
     <i class="fa fa-pencil-square-o" ></i> Insert
   </a>
 </nav>
 
-<form action="search_brand.php" class="search-box" id = "right-panel-link" method="post">
+<form action="search_motor.php" class="search-box" id = "right-panel-link" method="post">
   <div class="form-row">
 	  <div class"col">
 		  <form class="dropdown" id="right-panel-link" action="test_filter.php" method="post">
 					<select class="form-control" name="dd_opt">
-						<option value="no">Nomor</option>
-						<option value="nama_merk">Nama Merk</option>
-						<option value="kode_merk">Kode Merk</option>
-						<option value="count">Jumlah Barang</option>
+						<option value="id_motor">ID Motor</option>
+						<option value="nama_motor">Nama Motor</option>
 					</select>
 		</div>
 		&nbsp;&nbsp;
@@ -88,10 +86,8 @@ require_once 'config.php';
 <br>
 	<thead>
 		<tr>
-			<th>Nomor</th>
-			<th>Nama Merk</th>
-			<th>Kode Merk</th>
-			<th>Jumlah Barang</th>                    
+			<th>ID Motor</th>
+			<th>Nama Motor</th>                   
 		 </tr>
 	</thead>
 
@@ -115,34 +111,32 @@ require_once 'config.php';
   $page = isset($_GET["halaman"]) ? (int)$_GET["halaman"] : 1;
   $search_by = 'jenis';
   $mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
-  $result = pg_query("SELECT nama_merk,kode_merk,count FROM brand_count ORDER BY nama_merk ASC");
+  $result = pg_query("SELECT * FROM list_motor ORDER BY id_motor ASC");
   $total = pg_num_rows($result);
   $pages = ceil($total/$halaman);
   $no =$mulai+1;
   if (isset($_GET['search_param']))
   {
     $search=$_GET['search_param'];
-      if($select_by == 'id' OR $select_by == 'harga')
+      if($select_by == 'id_motor')
       {
-        $query = pg_query("select nama_merk,kode_merk,count from brand_count WHERE ".$select_by." = ".$search."")or die(error); 
+        $query = pg_query("SELECT * FROM list_motor WHERE ".$select_by." = ".$search."")or die(error); 
       }
       else
       {
-        $query = pg_query("select nama_merk,kode_merk,count from brand_count WHERE ".$select_by." LIKE '%".$search."%'")or die(error);
+        $query = pg_query("SELECT * FROM list_motor WHERE ".$select_by." LIKE '%".$search."%'")or die(error);
       }
     
   }
   else
   {
-  $query = pg_query("select nama_merk,kode_merk,count from brand_count LIMIT $halaman OFFSET $mulai")or die(error);
+  $query = pg_query("SELECT * FROM list_motor LIMIT $halaman OFFSET $mulai")or die(error);
   }
   while ($data = pg_fetch_assoc($query)) {
     ?>
-    <tr>
-      <td><?php echo $no++; ?></td>                  
-      <td><?php echo $data['nama_merk']; ?></td>
-      <td><?php echo $data['kode_merk']; ?></td>
-      <td><?php echo $data['count']; ?></td>           
+    <tr>                 
+      <td><?php echo $data['id_motor']; ?></td>
+      <td><?php echo $data['nama_motor']; ?></td>
     </tr>
     <?php               
   }
