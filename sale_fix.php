@@ -3,13 +3,12 @@
 <?php
 require_once 'config.php';
 session_start();
-$merk = $_SESSION['merk'];
-$nama = $_SESSION['nama'];
+$id = $_SESSION['id'];
 $jumlah = $_SESSION['jumlah'];
 
 //Queries
-$query1 = "UPDATE test_stock SET stock = stock - $jumlah WHERE merk ='$merk' AND nama = '$nama'";
-$query2 = "SELECT stock FROM test_stock WHERE merk = '$merk' AND nama = '$nama' ";
+$query1 = "UPDATE stock SET stock = stock - $jumlah WHERE id_tipe =$id";
+$query2 = "SELECT stock FROM stock WHERE id_tipe =$id ";
 $prep1 = pg_prepare($link,"reduce",$query1);
 $prep2 = pg_prepare($link,"check",$query2);
 
