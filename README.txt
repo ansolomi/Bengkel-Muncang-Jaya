@@ -174,7 +174,9 @@ CREATE VIEW complete_spareparts AS SELECT sp.id_tipe, sp.jenis, sp.merk, sp.tipe
 UPDATE 12/27/2019	--ican--
 
 Fixed: 
-typo on search_list column name (harga >< tanggal_input kebalik)
+typo on search_list.php column name (harga >< tanggal_input kebalik)
+typo on sale.php placeholder "Ketik merk barang disini..." -->  "Ketik ID barang disini..."
+fixed missing column name on sale_conf.php (<th>Tipe</th>)
 search_motor.php salah nama referensi page (search_brand.php -> search_motor.php)
 
 Update:
