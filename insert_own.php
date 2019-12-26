@@ -5,49 +5,6 @@ $jenis = $tipe = $namaMotor = '';
 $sql = "SELECT DISTINCT nama_motor FROM list_motor";
 $result = pg_query($sql);
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    try 
-    {   
-        $posted = true;
-        $namaMotor = $_POST["motorCompat"];
-        $jenis = $_POST["iJenis"];
-        $merk = $_POST["iMerk"];
-        $tipe = $_POST["iTipe"];
-        $harga = $_POST["iHarga"];
-        $stock = $_POST["iStock"];
-        
-        $new_sparepart = "INSERT INTO spareparts (jenis,tipe,nama_motor) VALUES ('$jenis','$merk','$tipe','$harga')";
-        $new_stock = "INSERT INTO stock(stock) VALUES ('$stock')";
-        pg_query($new_sparepart);
-        pg_query($new_stock);
-
-        //Checklist for Insert Motor Baru
-        $check = "SELECT nama_motor FROM list_motor where nama_motor = '$namaMotor' LIMIT 1";
-        $stmt = pg_prepare($link, "my_query",$check);
-        $stmt=pg_execute($link,"my_query",array());
-        @$param = pg_fetch_result($stmt,1);
-
-        if($param == FALSE)
-        {
-        //For Add Motor
-        $insert_into = "INSERT INTO list_motor (nama_motor) VALUES ('$namaMotor')";
-        $insert_into = pg_query($insert_into);
-        }
-
-        else
-        {
-            echo ("<script>
-            alert('Data sudah tercatat');
-            window.location.href='insert_own.php';
-            </script>");
-        }
-    }
-
-    catch(Exception $e)
-    {
-        echo $e;
-    }
-}
 ?>
 
 <HTML>
@@ -108,7 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 	<div class="tab-content">
 		<div id="home_menu" class="container tab-pane active"><br>
-            <form class="text-center" action="insert_own.php" method='post'>
+            <form class="text-center" action="insert_barang.php" method='post'>
                 <center>
                 <div class="md-form">
                 <label for="iTipe">Tipe Spareparts:</label>
@@ -173,7 +130,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		
         <div id="update_menu" class="container tab-pane fade"><br>
         <center><h2>Masukkan Entry Motor Baru<h2><center><br>
-			<form action = "insert_own.php" class = "text-center" method = "post">
+			<form action = "insert_motor.php" class = "text-center" method = "post">
                 <center>
                     <div class="md-form">
                         <label for="iNamaMotor">Nama Motor:</label>
