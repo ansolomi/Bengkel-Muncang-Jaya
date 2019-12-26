@@ -182,8 +182,8 @@ search_motor.php salah nama referensi page (search_brand.php -> search_motor.php
 Update:
 >added 'insert_barang.php'				//ini buat form insert barang
 >added 'insert_motor.php'				//ini buat form insert motor jadi dipisah
->semua file csv di zip					//csv data awal
->SQL inisiasi database 'SQL_database.txt'		//SQL awal
+>added 'CSV_Database.zip'				//csv data awal
+>added 'Query_Database.txt'				//Query awal
 
 
 
