@@ -156,6 +156,19 @@ INSERT INTO test_stock (merk,nama,stock) VALUES
 KALAU 4 notes diatas sudah selesai, projeck ini harusnya sudah OK, alias kelar. Semangat gays
 
 --------------------------------------------------------------------------------------------------------------------------------------
- 
-	
+UPDATE 12/26/2019
+
+Rename: 
+view_brand => view_motor.php
+serach_brand = search_motor.php
+
+Update:
+>remapping 'home.php'
+>Update di 'search_list,view_list,search_compat dan view_compat'.php
+>View baru: complete_spareparts
+
+Query:
+CREATE VIEW complete_spareparts AS SELECT sp.id_tipe, sp.jenis, sp.merk, sp.tipe, sp.harga, sp.tanggal_input, st.stock FROM spareparts sp FULL JOIN stock st ON sp.id_tipe = st.id_tipe;
+
+
 
