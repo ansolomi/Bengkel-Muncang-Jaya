@@ -1,11 +1,9 @@
 <?php
 require_once "config.php";
 @session_start();
-$nama = $_POST['iNama'];
-$merk = $_POST['iMerk'];
+$id = $_POST['iid'];
 $jumlah = $_POST['iJumlah'];
-$_SESSION['merk'] = $merk;
-$_SESSION['nama'] = $nama;
+$_SESSION['id'] = $id;
 $_SESSION['jumlah'] = $jumlah;
 
 // if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -77,14 +75,15 @@ $_SESSION['jumlah'] = $jumlah;
 	</thead>
 
     <?php
-        $preview = pg_query($link,"SELECT * FROM test_stock WHERE merk = '$merk' AND nama = '$nama' ");
+        $preview = pg_query($link,"SELECT id_tipe, jenis, merk, tipe, stock FROM complete_spareparts WHERE id_tipe = $id");
         while ($data = pg_fetch_assoc($preview)) 
         {
     ?>
     <tr>
-        <td><?php echo $data['id']; ?></td>                  
+        <td><?php echo $data['id_tipe']; ?></td>                  
+        <td><?php echo $data['jenis']; ?></td> 
         <td><?php echo $data['merk']; ?></td>
-        <td><?php echo $data['nama']; ?></td>
+        <td><?php echo $data['tipe']; ?></td>
         <td><?php echo $data['stock']; ?></td>              
     </tr>
 
