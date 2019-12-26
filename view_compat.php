@@ -1,5 +1,5 @@
 <?php
-  require('login.php');
+  session_start();
   if(isset($_SESSION['login_user']))
  {?>
 
@@ -29,7 +29,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>View Data Spareparts</title>
+    <title>View Data Kecocokan</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -38,7 +38,7 @@
 </head>
 
 <head>
- <h1><center>Daftar Spareparts<center></h1>
+ <h1><center>Daftar Kecocokan<center></h1>
 </head>
 
 <?php
@@ -61,10 +61,10 @@ require_once 'config.php';
 	  <div class"col">
 		  <form class="dropdown" id="right-panel-link" action="test_filter.php" method="post">
 					<select class="form-control" name="dd_opt">
-						<option value="id">No.ID</option>
-                        <option value="merk">Merk</option>
+						<option value="id_tipe">ID Spareparts</option>
 						<option value="jenis">Jenis</option>
-						<option value="tipe">Tipe</option>
+            <option value="tipe">Tipe</option>
+            <option value="nama_motor">Nama Motor</option>
 					</select>
 		</div>
 		&nbsp;&nbsp;
@@ -90,8 +90,8 @@ require_once 'config.php';
 		<tr>
 			<th>ID</th>
 			<th>Jenis</th>
-      <th>Merk</th>
-			<th>Tipe</th>                     
+      <th>Tipe</th>                     
+      <th>Nama Motor</th>
 		 </tr>
 	</thead>
 
@@ -111,38 +111,38 @@ require_once 'config.php';
     $search_by='jenis';
   }
   
-  $halaman = 10;
+  $halaman = 20;
   $page = isset($_GET["halaman"]) ? (int)$_GET["halaman"] : 1;
   $search_by = 'jenis';
   $mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
-  $result = pg_query("SELECT * FROM spareparts");
+  $result = pg_query("SELECT * FROM compatibility");
   $total = pg_num_rows($result);
   $pages = ceil($total/$halaman);
   $no =$mulai+1;
   if (isset($_GET['search_param']))
   {
     $search=$_GET['search_param'];
-      if($select_by == 'id' OR $select_by == 'harga')
+      if($select_by == 'id_tipe')
       {
-        $query = pg_query("select id,merk,jenis,tipe from spareparts WHERE ".$select_by." = ".$search." ORDER BY jenis ASC")or die(error); 
+        $query = @pg_query("select id_tipe,jenis,tipe,nama_motor from compatibility WHERE ".$select_by." = ".$search." ORDER BY jenis ASC")or die(error); 
       }
       else
       {
-        $query = pg_query("select id,merk,jenis,tipe from spareparts WHERE ".$select_by." LIKE '%".$search."%' ORDER BY jenis ASC")or die(error);
+        $query = @pg_query("select id_tipe,jenis,tipe,nama_motor from compatibility WHERE ".$select_by." LIKE '%".$search."%' ORDER BY jenis ASC")or die(error);
       }
     
   }
   else
   {
-  $query = pg_query("select id,merk,jenis,tipe from spareparts ORDER BY jenis ASC LIMIT $halaman OFFSET $mulai")or die(error);
+  $query = pg_query("select id_tipe,jenis,tipe,nama_motor from compatibility ORDER BY jenis ASC LIMIT $halaman OFFSET $mulai")or die(error);
   }
   while ($data = pg_fetch_assoc($query)) {
     ?>
     <tr>
-      <td><?php echo $data['id']; ?></td>                  
+      <td><?php echo $data['id_tipe']; ?></td>                  
       <td><?php echo $data['jenis']; ?></td>
-      <td><?php echo $data['merk']; ?></td>
-      <td><?php echo $data['tipe']; ?></td>            
+      <td><?php echo $data['tipe']; ?></td>
+      <td><?php echo $data['nama_motor']; ?></td>            
     </tr>
     <?php               
   }
@@ -151,14 +151,14 @@ require_once 'config.php';
 </div>
       
 
-<div class="footer"><center>
+<div class="footer"><center><br>
   <?php for ($i=1; $i<=$pages ; $i++){ ?>
   <a href="?halaman=<?php echo $i; ?>"><?php echo $i; ?></a>
 
   <?php } ?>
 
 </div><center>
-
+<br>
 </html>
   <?php }
 
