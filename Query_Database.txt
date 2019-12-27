@@ -35,6 +35,14 @@ tipe VARCHAR (255) NOT NULL,
 nama_motor VARCHAR (255) NOT NULL,
 id_motor INT REFERENCES list_motor(id_motor));
 
+CREATE TABLE login(
+id SERIAL NOT NULL,
+username VARCHAR(255) NOT NULL,
+password VARCHAR(255) NOT NULL);
+
+INSERT INTO login (username,password) VALUES
+('admin','912ec803b2ce49e4a541068d495ab570');
+
 
 \COPY spareparts (jenis, merk, tipe, harga) FROM 'C:\users\ikhsan f\desktop\bengkel.csv' DELIMITER ',' CSV HEADER;
 \COPY list_motor (nama_motor) FROM 'C:\users\ikhsan f\desktop\motor.csv' DELIMITER ',' CSV HEADER;
