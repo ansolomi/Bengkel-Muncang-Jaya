@@ -1,0 +1,160 @@
+CREATE SEQUENCE id_tipe
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 1000
+START 1
+CACHE 1;
+
+CREATE SEQUENCE id_merk
+INCREMENT 1
+MINVALUE 1001
+MAXVALUE 2000
+START 1001
+CACHE 1;
+
+CREATE SEQUENCE id_jenis
+INCREMENT 1
+MINVALUE 2001
+MAXVALUE 3000
+START 2001
+CACHE 1;
+
+CREATE SEQUENCE id_motor
+INCREMENT 1
+MINVALUE 3001
+MAXVALUE 4000
+START 3001
+CACHE 1;
+
+CREATE SEQUENCE id_transaksi
+INCREMENT 1
+MINVALUE 9000
+MAXVALUE 9999999
+START 9000
+CACHE 1;
+
+CREATE TABLE tipe 
+(id_tipe INT DEFAULT NEXTVAL('id_tipe') PRIMARY KEY,
+nama_tipe VARCHAR(255) NOT NULL UNIQUE);
+
+CREATE TABLE merk
+(id_merk INT DEFAULT NEXTVAL('id_merk') PRIMARY KEY,
+nama_merk VARCHAR(255) NOT NULL UNIQUE);
+
+CREATE TABLE jenis
+(id_jenis INT DEFAULT NEXTVAL('id_jenis') PRIMARY KEY,
+nama_jenis VARCHAR(255) NOT NULL UNIQUE);
+
+CREATE TABLE motor
+(id_motor INT DEFAULT NEXTVAL('id_motor') PRIMARY KEY,
+nama_motor VARCHAR(255) NOT NULL UNIQUE);
+
+CREATE TABLE spareparts
+(id_jenis INT REFERENCES jenis(id_jenis),
+id_merk INT REFERENCES merk(id_merk),
+id_tipe INT REFERENCES tipe(id_tipe),
+stock INT NOT NULL,
+harga INT NOT NULL);
+
+CREATE TABLE compatibility
+(id_tipe INT REFERENCES tipe(id_tipe),
+id_motor INT REFERENCES motor(id_motor));
+
+CREATE TABLE riwayat_jual
+(id_transaksi INT DEFAULT NEXTVAL ('id_transaksi') PRIMARY KEY,
+id_tipe INT REFERENCES tipe(id_tipe),
+jumlah INT NOT NULL,
+total_pendapatan INT NOT NULL,
+tanggal TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP);
+
+CREATE TABLE riwayat_restock
+(id_tipe INT REFERENCES tipe(id_tipe),
+jumlah INT NOT NULL,
+tanggal TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP);
+
+\COPY tipe (nama_tipe) FROM 'C:\tipe.csv' DELIMITER ',' CSV HEADER;
+\COPY merk (nama_merk) FROM 'C:\merk.csv' DELIMITER ',' CSV HEADER;
+\COPY jenis (nama_jenis) FROM 'C:\jenis.csv' DELIMITER ',' CSV HEADER;
+\COPY motor (nama_motor) FROM 'C:\motor.csv' DELIMITER ',' CSV HEADER;
+\COPY spareparts FROM 'C:\spareparts.csv' DELIMITER ',' CSV HEADER;
+\COPY compatibility FROM 'C:\compatibility.csv' DELIMITER ',' CSV HEADER;
+\COPY riwayat_jual (id_tipe,riwayat,total_pendapatan) FROM 'C:\sales.csv' DELIMITER ',' CSV HEADER;
+\COPY riwayat_restock (id_tipe,jumlah) FROM 'C:\restock.csv' DELIMITER ',' CSV HEADER;
+
+
+CREATE OR REPLACE FUNCTION func_tipe()
+RETURNS TRIGGER AS
+$$
+BEGIN
+	NEW.nama_tipe = INITCAP(NEW.nama_tipe);
+	RETURN NEW;
+END;
+$$
+LANGUAGE 'plpgsql' VOLATILE;
+
+CREATE TRIGGER caps_tipe 
+BEFORE 
+	INSERT ON tipe
+	FOR EACH ROW
+	EXECUTE PROCEDURE func_tipe();
+
+
+CREATE OR REPLACE FUNCTION func_merk()
+RETURNS TRIGGER AS
+$$
+BEGIN
+	NEW.nama_merk = INITCAP(NEW.nama_merk);
+	RETURN NEW;
+END;
+$$
+LANGUAGE 'plpgsql' VOLATILE;
+
+CREATE TRIGGER caps_merk
+BEFORE 
+	INSERT ON merk
+	FOR EACH ROW
+	EXECUTE PROCEDURE func_merk();
+
+
+CREATE OR REPLACE FUNCTION func_jenis()
+RETURNS TRIGGER AS
+$$
+BEGIN
+	NEW.nama_jenis = INITCAP(NEW.nama_jenis);
+	RETURN NEW;
+END;
+$$
+LANGUAGE 'plpgsql' VOLATILE;
+
+CREATE TRIGGER caps_jenis
+BEFORE 
+	INSERT ON jenis
+	FOR EACH ROW
+	EXECUTE PROCEDURE func_jenis();
+
+
+CREATE VIEW complete_list AS
+SELECT jenis.nama_jenis, merk.nama_merk, tipe.nama_tipe, stock, harga
+FROM spareparts NATURAL JOIN jenis NATURAL JOIN tipe NATURAL JOIN merk;
+
+CREATE VIEW view_compatibility AS
+SELECT nama_jenis, nama_merk, nama_tipe, nama_motor FROM 
+compatibility NATURAL JOIN motor 
+NATURAL JOIN spareparts
+INNER JOIN jenis ON spareparts.id_jenis = jenis.id_jenis
+INNER JOIN merk ON spareparts.id_merk = merk.id_merk
+INNER JOIN tipe ON spareparts.id_tipe = tipe.id_tipe;
+
+CREATE VIEW view_jual AS
+SELECT nama_jenis, nama_merk, nama_tipe, jumlah, total_pendapatan, tanggal FROM
+riwayat_jual NATURAL JOIN tipe 
+NATURAL JOIN spareparts
+INNER JOIN jenis ON spareparts.id_jenis = jenis.id_jenis
+INNER JOIN merk ON spareparts.id_merk = merk.id_merk;
+
+CREATE VIEW view_restock AS
+SELECT nama_jenis, nama_merk, nama_tipe, jumlah, tanggal FROM
+riwayat_restock NATURAL JOIN tipe
+NATURAL JOIN spareparts
+INNER JOIN jenis ON spareparts.id_jenis = jenis.id_jenis
+INNER JOIN merk ON spareparts.id_merk = merk.id_merk;
