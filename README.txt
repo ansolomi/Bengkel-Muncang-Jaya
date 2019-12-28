@@ -198,4 +198,7 @@ Update 12/29/2019
 yang diperluin:
 -cara biar satu id_transaksi bisa multiple item (mungkin bikin table baru id_transaksi sama nama orang?)
 
+file yang diupdate ada di Muncang_Jaya_Update1.zip
+selanjutnya kalau ada update, lanjut format ^ aja, tinggal zip semua phpnya jadi gampang dan ada historynya
+
 
