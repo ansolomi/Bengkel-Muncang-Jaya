@@ -72,6 +72,14 @@ CREATE TABLE riwayat_restock
 jumlah INT NOT NULL,
 tanggal TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP);
 
+CREATE TABLE login(
+id SERIAL NOT NULL,
+username VARCHAR(255) NOT NULL,
+password VARCHAR(255) NOT NULL);
+
+INSERT INTO login (username,password) VALUES
+('admin','912ec803b2ce49e4a541068d495ab570');
+
 \COPY tipe (nama_tipe) FROM 'C:\tipe.csv' DELIMITER ',' CSV HEADER;
 \COPY merk (nama_merk) FROM 'C:\merk.csv' DELIMITER ',' CSV HEADER;
 \COPY jenis (nama_jenis) FROM 'C:\jenis.csv' DELIMITER ',' CSV HEADER;
