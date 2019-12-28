@@ -170,5 +170,21 @@ Update:
 Query:
 CREATE VIEW complete_spareparts AS SELECT sp.id_tipe, sp.jenis, sp.merk, sp.tipe, sp.harga, sp.tanggal_input, st.stock FROM spareparts sp FULL JOIN stock st ON sp.id_tipe = st.id_tipe;
 
+------------------------------------------------------------------------------------------------------------------------------------
+Update 12/28/2019
+
+-Untuk Hari Senin, 30 Desember 2019-
+
+-Semua files di update, kesuluruhan terjadi perubahan
+-Basis beberapa file masih mirip, bila tidak sama dengan build sevelumnya
+-Untuk mengetes, Silahkan downoad 'Bengkel_Muncang.zip', pindahkan sluruh CSV ke directory 'C:\' atau directory pilihan lu
+-Tolong cari ke inconsistency-an,  kl ada bug bisa lgsg di fix
+
+Perubahan:
+>Riwayat sales sekarang punya jumlah total hargadari transaksi
+>Untu Compatibility dan Spareparts, HANYA BISA menambahkan jenis/tipe/merk/motor yang sudah ada di DB
+>View_jual ada 'total_pendapatan' 
+
+Semangat, senin insyaAllah bisa lebih sukses dan baik dari kemarin. 
 
 
