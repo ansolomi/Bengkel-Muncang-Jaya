@@ -187,4 +187,15 @@ Perubahan:
 
 Semangat, senin insyaAllah bisa lebih sukses dan baik dari kemarin. 
 
+------------------------------------------------------------------------------------------------------------------------------------
+Update 12/29/2019
+
+>update query VIEW baru 'preview_sale'
+>sale_conf SELECT bla bla FROM preview_sale (tadinya FROM nya halu maklum genta ngantuk)
+>untuk riwayat jual tidak ada total_pendapatan -> total_pendapatan pindah ke view preview_sale pake rumus (jumlah*harga) AS total
+>fix typo di sale_fix.php 'hostorize' -> 'historize'
+
+yang diperluin:
+-cara biar satu id_transaksi bisa multiple item (mungkin bikin table baru id_transaksi sama nama orang?)
+
 
