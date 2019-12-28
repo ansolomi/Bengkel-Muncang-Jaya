@@ -29,7 +29,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>View Data Spareparts</title>
+    <title>View List jenis</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -56,13 +56,13 @@ require_once 'config.php';
   </a>
 </nav>
 
-<form action="search_motor.php" class="search-box" id ="right-panel-link" method="post">
+<form action="search_jenis.php" class="search-box" id = "right-panel-link" method="post">
   <div class="form-row">
 	  <div class"col">
 		  <form class="dropdown" id="right-panel-link" action="test_filter.php" method="post">
 					<select class="form-control" name="dd_opt">
-						<option value="id_motor">ID Motor</option>
-						<option value="nama_motor">Nama Motor</option>
+						<option value="id_jenis">ID Jenis</option>
+						<option value="nama_jenis">Nama Jenis</option>
 					</select>
 		</div>
 		&nbsp;&nbsp;
@@ -86,8 +86,8 @@ require_once 'config.php';
 <br>
 	<thead>
 		<tr>
-			<th>ID Motor</th>
-			<th>Nama Motor</th>                   
+			<th>ID Jenis</th>
+			<th>Nama Jenis</th>                   
 		 </tr>
 	</thead>
 
@@ -104,34 +104,55 @@ require_once 'config.php';
     echo "<b>Results for ".$search_by."</b>";
   }
   else{
-    $search_by='nama_motor';
+    $search_by='jenis';
   }
-
-  $select_by = $_POST["dd_opt"];
-  $search=$_POST['search_param'];
-
-      if($select_by == 'id_motor')
+  
+  $halaman = 10;
+  $page = isset($_GET["halaman"]) ? (int)$_GET["halaman"] : 1;
+  $search_by = 'jenis';
+  $mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
+  $result = pg_query("SELECT * FROM jenis ORDER BY id_jenis ASC");
+  $total = pg_num_rows($result);
+  $pages = ceil($total/$halaman);
+  $no =$mulai+1;
+  if (isset($_GET['search_param']))
+  {
+    $search=$_GET['search_param'];
+      if($select_by == 'id_jenis')
       {
-        $query = pg_query("SELECT * FROM motor WHERE ".$select_by." = ".$search."")or die(error); 
+        $query = pg_query("SELECT * FROM jenis WHERE ".$select_by." = ".$search."")or die(error); 
       }
       else
       {
-        $query = pg_query("SELECT * FROM motor WHERE ".$select_by." LIKE '%".$search."%'")or die(error);
+        $query = pg_query("SELECT * FROM jenis WHERE ".$select_by." LIKE '%".$search."%'")or die(error);
       }
+    
+  }
+  else
+  {
+  $query = pg_query("SELECT * FROM jenis LIMIT $halaman OFFSET $mulai")or die(error);
+  }
   while ($data = pg_fetch_assoc($query)) {
     ?>
     <tr>                 
-      <td><?php echo $data['id_motor']; ?></td>
-      <td><?php echo $data['nama_motor']; ?></td>
+      <td><?php echo $data['id_jenis']; ?></td>
+      <td><?php echo $data['nama_jenis']; ?></td>
     </tr>
     <?php               
   }
   ?>
   </table>
 </div>
-<nav class="nav nav-pills" id = "left-panel-link">
-    <a href="view_motor.php" class="nav-item nav-link active">
-        <i class="fa fa-arrow-left" ></i> Return to View
+      
+
+<div class="footer"><center>
+  <?php for ($i=1; $i<=$pages ; $i++){ ?>
+  <a href="?halaman=<?php echo $i; ?>"><?php echo $i; ?></a>
+
+  <?php } ?>
+
+</div><center>
+
 </html>
   <?php }
 

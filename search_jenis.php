@@ -56,13 +56,13 @@ require_once 'config.php';
   </a>
 </nav>
 
-<form action="search_motor.php" class="search-box" id ="right-panel-link" method="post">
+<form action="search_jenis.php" class="search-box" id ="right-panel-link" method="post">
   <div class="form-row">
 	  <div class"col">
 		  <form class="dropdown" id="right-panel-link" action="test_filter.php" method="post">
 					<select class="form-control" name="dd_opt">
-						<option value="id_motor">ID Motor</option>
-						<option value="nama_motor">Nama Motor</option>
+						<option value="id_jenis">ID Jenis</option>
+						<option value="nama_jenis">Nama Jenis</option>
 					</select>
 		</div>
 		&nbsp;&nbsp;
@@ -86,8 +86,8 @@ require_once 'config.php';
 <br>
 	<thead>
 		<tr>
-			<th>ID Motor</th>
-			<th>Nama Motor</th>                   
+			<th>ID Jenis</th>
+			<th>Nama Jenis</th>                   
 		 </tr>
 	</thead>
 
@@ -104,25 +104,25 @@ require_once 'config.php';
     echo "<b>Results for ".$search_by."</b>";
   }
   else{
-    $search_by='nama_motor';
+    $search_by='nama_jenis';
   }
 
   $select_by = $_POST["dd_opt"];
   $search=$_POST['search_param'];
 
-      if($select_by == 'id_motor')
+      if($select_by == 'id_jenis')
       {
-        $query = pg_query("SELECT * FROM motor WHERE ".$select_by." = ".$search."")or die(error); 
+        $query = pg_query("SELECT * FROM jenis WHERE ".$select_by." = ".$search."")or die(error); 
       }
       else
       {
-        $query = pg_query("SELECT * FROM motor WHERE ".$select_by." LIKE '%".$search."%'")or die(error);
+        $query = pg_query("SELECT * FROM jenis WHERE ".$select_by." LIKE '%".$search."%'")or die(error);
       }
   while ($data = pg_fetch_assoc($query)) {
     ?>
     <tr>                 
-      <td><?php echo $data['id_motor']; ?></td>
-      <td><?php echo $data['nama_motor']; ?></td>
+      <td><?php echo $data['id_jenis']; ?></td>
+      <td><?php echo $data['nama_jenis']; ?></td>
     </tr>
     <?php               
   }
@@ -130,7 +130,7 @@ require_once 'config.php';
   </table>
 </div>
 <nav class="nav nav-pills" id = "left-panel-link">
-    <a href="view_motor.php" class="nav-item nav-link active">
+    <a href="view_jenis.php" class="nav-item nav-link active">
         <i class="fa fa-arrow-left" ></i> Return to View
 </html>
   <?php }

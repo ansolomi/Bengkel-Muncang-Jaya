@@ -12,7 +12,7 @@
 
 </style>
     <meta charset="utf-8">
-    <title>HomePage Bengkel</title>
+    <title>Homepage Bengkel</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="theme.css" />  
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -46,16 +46,22 @@
 		<li class="nav-item">
 			<a class="nav-link mx-auto" data-toggle="pill" href="#compatibility_menu">Compatibility</a>
 		</li>
+		<li class="nav-item">
+			<a class="nav-link mx-auto" data-toggle="pill" href="#record_menu">Record</a>
+		</li>
 	</ul>
 
 
 	<div class="tab-content">
 		<div id="home_menu" class="container tab-pane active"><br>
 			<form class = "button">
-			  <center><div class ="btn">
-			  <a href="view_list.php" class="btn btn-dark btn-lg"><font size='5'>View Complete List</font></a><br><br>
-        <a href="view_motor.php" class="btn btn-dark btn-lg"><font size='5'>View Bike List</font></a><br><br> 
-			  </div></center>
+			<center><div class ="btn">
+			<a href="view_list.php" class="btn btn-dark btn-lg"><font size='5'>View List Spareparts</font></a><br><br>
+        	<a href="view_merk.php" class="btn btn-dark btn-lg"><font size='5'>View Merk Motor</font></a><br><br>
+			<a href="view_motor.php" class="btn btn-dark btn-lg"><font size='5'>View List Motor</font></a><br><br>  
+			<a href="view_tipe.php" class="btn btn-dark btn-lg"><font size='5'>View List Tipe</font></a><br><br> 
+			<a href="view_jenis.php" class="btn btn-dark btn-lg"><font size='5'>View List Jenis</font></a><br><br> 
+			</div></center>
 			</form> 
 		</div>
 		
@@ -63,7 +69,6 @@
 			<form class = "button">
 			  <center><div class ="btn">
           <a href="insert_own.php" class="btn btn-dark btn-lg "><font size='5'>Add New Item</font></a><br><br>
-          <a href="delete.php" class="btn btn-dark btn-lg"><font size='5'>Delete Item</font></a><br><br>
 				  <a href="sale.php" class="btn btn-dark btn-lg"><font size='5'>Sale Today</font></a>
 			  </div></center>
 			</form> 
@@ -73,6 +78,15 @@
 			<form class = "button">
 				<center><div class ="btn">
 					<a href="view_compat.php" class="btn btn-dark btn-lg "><font size='5'>Compatibility List</font></a><br><br>
+				</div></center>
+			</form> 
+		</div>
+
+		<div id="record_menu" class="container tab-pane fade"><br>
+			<form class = "button">
+				<center><div class ="btn">
+					<a href="view_restock_history.php" class="btn btn-dark btn-lg "><font size='5'>Riwayat Restock</font></a><br><br>
+					<a href="view_sale_history.php" class="btn btn-dark btn-lg "><font size='5'>Riwayat Penjualan</font></a><br><br>
 				</div></center>
 			</form> 
 		</div>

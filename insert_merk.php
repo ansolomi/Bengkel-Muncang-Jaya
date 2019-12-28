@@ -2,23 +2,22 @@
 require_once "config.php";
 require_once "insert_own.php";
 $posted = false;
-$jenis = $tipe = $namaMotor = '';
+$jenis = $tipe = $namamerk = '';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     try 
     {   
         $posted = true;
-        $namaMotor = $_POST["iNamaMotor"];
+        $namamerk = $_POST["iNamaMerk"];
         
-        $new_motor = "INSERT INTO motor (nama_motor) VALUES ('$namaMotor')";
-        pg_query($new_motor);
+        $new_merk = "INSERT INTO merk (nama_merk) VALUES ('$namamerk')";
+        pg_query($new_merk);
 
       
             echo ("<script>
             alert('Data sudah tercatat');
             window.location.href='insert_own.php';
             </script>");
-       
     }
 
     catch(Exception $e)

@@ -2,16 +2,17 @@
 require_once "config.php";
 require_once "insert_own.php";
 $posted = false;
-$jenis = $tipe = $namaMotor = '';
+$jenis = $tipe = $motor = '';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     try 
     {   
         $posted = true;
-        $namaMotor = $_POST["iNamaMotor"];
+        $tipe = $_POST["comTipe"];
+        $motor = $_POST["comMotor"];
         
-        $new_motor = "INSERT INTO motor (nama_motor) VALUES ('$namaMotor')";
-        pg_query($new_motor);
+        $new_compat = "INSERT INTO compatibility VALUES ($tipe,$motor)";
+        pg_query($new_compat);
 
       
             echo ("<script>

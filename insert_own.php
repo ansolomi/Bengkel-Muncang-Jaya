@@ -2,16 +2,22 @@
 require_once "config.php";
 $posted = false;
 $jenis = $tipe = $namaMotor = '';
-$sql = "SELECT DISTINCT nama_motor FROM list_motor";
+$sql = "SELECT DISTINCT nama_motor FROM motor ORDER BY nama_motor ASC";
+$jenis = pg_query("SELECT * FROM jenis ORDER BY nama_jenis ASC");
+$tipe = pg_query("SELECT * FROM tipe ORDER BY nama_tipe ASC");
+$tipe2 = pg_query("SELECT * FROM tipe ORDER BY nama_tipe ASC");
+$tipe3 = pg_query("SELECT * FROM tipe ORDER BY nama_tipe ASC");
+$merk = pg_query("SELECT * FROM merk ORDER BY nama_merk ASC");
+$motor = pg_query("SELECT * FROM motor ORDER BY nama_motor ASC");
 $result = pg_query($sql);
 
 ?>
 
 <HTML>
 <head>
-
+<br>
 <nav class="nav nav-pills" id = "left-panel-link">
-        <a href="home.php" class="nav-item nav-link active">
+        &nbsp &nbsp <a href="home.php" class="nav-item nav-link active">
           <i class="fa fa-home" ></i> Home
         </a>&nbsp;&nbsp;
 </nav>
@@ -41,106 +47,224 @@ $result = pg_query($sql);
 
 <body>
 <!-- <?php
-	if($posted == true)
-	{
+ if($posted == true)
+ {
         echo '<script type="text/javascript">';
         echo 'windows.alert("Data '.$jenis.' Berhasil Dimasukkan")';
         echo '</script>';
-	}
-	
-	?> -->
+ }
+ 
+ ?> -->
 
 
 <div class="container">
 
-	<ul class="nav nav-pills justify-content-center" role="tablist">
-		<li class="nav-item">
-			<a class="nav-link active mx-auto" data-toggle="pill" href="#home_menu">Tambah Spareparts</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link mx-auto" data-toggle="pill" href="#update_menu">Tambah Motor</a>
-		</li>
+ <ul class="nav nav-pills justify-content-center" role="tablist">
+  <li class="nav-item">
+   <a class="nav-link active mx-auto" data-toggle="pill" href="#home_menu">Tambah Spareparts</a>
+  </li>
+  <li class="nav-item">
+   <a class="nav-link mx-auto" data-toggle="pill" href="#tambah_motor">Tambah Motor</a>
+  </li>
+  <li class="nav-item">
+   <a class="nav-link mx-auto" data-toggle="pill" href="#tambah_jenis">Tambah Jenis</a>
+  </li>
+  <li class="nav-item">
+   <a class="nav-link mx-auto" data-toggle="pill" href="#tambah_merk">Tambah Merk</a>
+  </li>
+  <li class="nav-item">
+   <a class="nav-link mx-auto" data-toggle="pill" href="#tambah_tipe">Tambah Tipe</a>
+  </li>
+  <li class="nav-item">
+   <a class="nav-link mx-auto" data-toggle="pill" href="#tambah_compat">Tambah Compatibility</a>
+  </li>
+  <li class="nav-item">
+   <a class="nav-link mx-auto" data-toggle="pill" href="#update_stock">Tambah Stock</a>
+  </li>
     </ul>
     <br>
 
-	<div class="tab-content">
-		<div id="home_menu" class="container tab-pane active"><br>
+ <div class="tab-content">
+  <div id="home_menu" class="container tab-pane active"><br>
             <form class="text-center" action="insert_barang.php" method='post'>
+
                 <center>
                 <div class="md-form">
-                <label for="iTipe">Tipe Spareparts:</label>
-                <input name = "iTipe" type="text" class="form-control mb-3 col-5" placeholder="Tipe Spareparts...">
+                    <label>Jenis Spareparts:</label>
+                        <?php 
+                        echo "<select name='spJenis' class='form-control mb-3 col-5' placeholder='Pilih Jenis'>";
+                        while ($rowj = pg_fetch_array($jenis)) 
+                        {
+                          echo "<option value='" . $rowj['id_jenis'] . "'>" . $rowj['nama_jenis'] . "</option>";
+                        }  
+                        echo "</select>"; 
+                        ?>
                 </div>
                 </center>
 
                 <center>
                 <div class="md-form">
-                <label for="iMerk">Merk Spareparts:</label>
-                <input name = "iMerk" type="text" class="form-control mb-3 col-5" placeholder="Tipe Spareparts...">
-                </div>
-                </center>
-                
-                <center>
-                <div class="md-form">
-                <label for="iJenis">Jenis Spareparts:</label>
-                <input name = "iJenis" type="text" class="form-control mb-3 col-5" placeholder="Jenis Spareparts...">
-                </div>
-                </center>
-
-                <center>
-                <div class="md-form">
-                <label for="iHarga">Harga Satuan:</label>
-                <input name = "iHarga" type="number" class="form-control mb-3 col-5" placeholder="Harga satuan barang...">
+                    <label>Merk Spareparts:</label>
+                        <?php 
+                        echo "<select name='spMerk' class='form-control mb-3 col-5' placeholder='Pilih Merk'>";
+                        while ($rowm = pg_fetch_array($merk)) 
+                        {
+                          echo "<option value='" . $rowm['id_merk'] . "'>" . $rowm['nama_merk'] . "</option>";
+                        }  
+                        echo "</select>"; 
+                        ?>
                 </div>
                 </center>
 
                 <center>
                 <div class="md-form">
-                <label for="iStock">Stock Awal:</label>
-                <input name = "iStock" type="number" class="form-control mb-3 col-5" placeholder="Jumlah Stock Awal...">
-                </div>
-                </center>
-                
-                <center>
-                <div class="md-form">
-                <label for="iMerkBarang">Motor Yang Cocok:</label>
-                <?php 
-                echo "<select name='motorCompat' class='form-control mb-3 col-5' placeholder='Pilih 1 Motor'>";
-                while ($row = pg_fetch_array($result)) {
-                echo "<option value='" . $row['nama_motor'] . "'>" . $row['nama_motor'] . "</option>";
-                }  
-                echo "</select>"; 
-                ?>
+                    <label>Tipe Spareparts:</label>
+                        <?php 
+                        echo "<select name='spTipe' class='form-control mb-3 col-5' placeholder='Pilih Tipe'>";
+                        while ($rowt = pg_fetch_array($tipe)) 
+                        {
+                          echo "<option value='" . $rowt['id_tipe'] . "'>" . $rowt['nama_tipe'] . "</option>";
+                        }  
+                        echo "</select>"; 
+                        ?>
                 </div>
                 </center>
 
-                <!-- <center>
-                <div class="field_wrapper">
-                <label for="iTipe">Cocok dengan motor:</label>
-                <input type="text" name="field_name[]" value="" class="form-control mb-3 col-5">
-                <a href="javascript:void(0);" class="add_button" title="Add field"><img src="add-icon.png"/></a>
+                <center>
+                <div class="md-form">
+                <label for="spStock">Stock Awal:</label>
+                <input name = "spStock" type="Number" class="form-control mb-3 col-5" placeholder="Stock Awal...">
                 </div>
-                </center> -->
+                </center>
+
+                <center>
+                <div class="md-form">
+                <label for="spHarga">Harga Jual (Tidak menggunakan koma [,] atua titik [.]):</label>
+                <input name = "spHarga" type="Number" class="form-control mb-3 col-5" placeholder="Harga Jual...">
+                </div>
+                </center>
 
                 <br><br>
                 <center><input type="submit" class="btn btn-primary btn-lg" value="Submit"></center>
             </form>
 <br>
-		</div>
-		
-        <div id="update_menu" class="container tab-pane fade"><br>
-        <center><h2>Masukkan Entry Motor Baru<h2><center><br>
-			<form action = "insert_motor.php" class = "text-center" method = "post">
-                <center>
-                    <div class="md-form">
-                        <label for="iNamaMotor">Nama Motor:</label>
-                        <input name = "iNamaMotor" type="text" class="form-control mb-3 col-5" placeholder="Nama Motor....">
-                    </div>
-                </center>
-                <center><input type="submit" class="btn btn-primary btn-lg" value="Submit"></center>
-			</form> 
-		</div>
-	</div>
+  </div>
+  
+  <div id="tambah_motor" class="container tab-pane fade"><br>
+    <center><h4>Masukkan Entry Motor Baru<h4></center><br>
+      <form action = "insert_motor.php" class = "text-center" method = "post">
+        <center>
+          <div class="md-form">
+            <label for="iNamaMotor">Nama Motor:</label>
+            <input name = "iNamaMotor" type="text" class="form-control mb-3 col-5" placeholder="Nama Motor....">
+          </div>
+         </center>
+    <center><input type="submit" class="btn btn-primary btn-lg" value="Submit"></center>
+    </form> 
+  </div>
+
+  <div id="tambah_jenis" class="container tab-pane fade"><br>
+    <center><h4>Masukkan Entry Jenis Baru<h4></center><br>
+      <form action = "insert_jenis.php" class = "text-center" method = "post">
+        <center>
+          <div class="md-form">
+            <label for="iNamaJenis">Nama Jenis:</label>
+            <input name = "iNamaJenis" type="text" class="form-control mb-3 col-5" placeholder="Nama Tipe....">
+          </div>
+         </center>
+    <center><input type="submit" class="btn btn-primary btn-lg" value="Submit"></center>
+    </form> 
+  </div>
+
+  <div id="tambah_merk" class="container tab-pane fade"><br>
+    <center><h4>Masukkan Entry Merk Baru<h4></center><br>
+      <form action = "insert_merk.php" class = "text-center" method = "post">
+        <center>
+          <div class="md-form">
+            <label for="iNamaMerk">Nama Merk:</label>
+            <input name = "iNamaMerk" type="text" class="form-control mb-3 col-5" placeholder="Nama Merk....">
+          </div>
+         </center>
+    <center><input type="submit" class="btn btn-primary btn-lg" value="Submit"></center>
+    </form> 
+  </div>
+
+  <div id="tambah_tipe" class="container tab-pane fade"><br>
+    <center><h4>Masukkan Entry Tipe Baru<h4></center><br>
+      <form action = "insert_tipe.php" class = "text-center" method = "post">
+        <center>
+          <div class="md-form">
+            <label for="iNamaTipe">Nama Tipe:</label>
+            <input name = "iNamaTipe" type="text" class="form-control mb-3 col-5" placeholder="Nama Tipe....">
+          </div>
+         </center>
+    <center><input type="submit" class="btn btn-primary btn-lg" value="Submit"></center>
+    </form> 
+  </div>
+
+  <div id="tambah_compat" class="container tab-pane fade"><br>
+    <center><h4>Masukkan Entry Compatibility Baru<h4></center><br>
+      <form action = "insert_compat.php" class = "text-center" method = "post">
+      <center>
+        <div class="md-form">
+          <label>Tipe Spareparts:</label>
+          <?php 
+            echo "<select name='comTipe' class='form-control mb-3 col-5' placeholder='Pilih Tipe'>";
+            while ($rowt = pg_fetch_array($tipe2)) 
+            {
+              echo "<option value='" . $rowt['id_tipe'] . "'>" . $rowt['nama_tipe'] . "</option>";
+            }  
+            echo "</select>"; 
+          ?>
+          </div>
+      </center>
+
+      <center>
+        <div class="md-form">
+          <label>Tipe Motor:</label>
+          <?php 
+            echo "<select name='comMotor' class='form-control mb-3 col-5' placeholder='Pilih Motor'>";
+            while ($rowm = pg_fetch_array($motor)) 
+            {
+              echo "<option value='" . $rowm['id_motor'] . "'>" . $rowm['nama_motor'] . "</option>";
+            }  
+            echo "</select>"; 
+          ?>
+          </div>
+      </center>
+
+    <center><input type="submit" class="btn btn-primary btn-lg" value="Submit"></center>
+    </form> 
+  </div>
+  
+  <div id="update_stock" class="container tab-pane fade"><br>
+        <center><h4>Masukkan ID barang dan stock yang ingin ditambah<h4><center><br>
+            <form action = "insert_update_stock.php" class = "text-center" method = "post">
+              <center>
+                <div class="md-form">
+                    <label>Tipe Spareparts:</label>
+                        <?php 
+                        echo "<select name='iTipe_2' class='form-control mb-3 col-5' placeholder='Pilih Tipe'>";
+                        while ($rowt2 = pg_fetch_array($tipe3)) 
+                        {
+                          echo "<option value='" . $rowt2['id_tipe'] . "'>" . $rowt2['nama_tipe'] . "</option>";
+                        }  
+                        echo "</select>"; 
+                        ?>
+                </div>
+              </center>
+         
+            <center>
+                <div class="md-form">
+                <label for="iStock_update">Banyak Stock Baru:</label>
+                <input name = "iStock_update" type="number" class="form-control mb-3 col-5" placeholder="Jumlah Barang Baru">
+                </div>
+            </center>
+                
+          <center><input type="submit" class="btn btn-primary btn-lg" value="Submit"></center>
+   </form> 
+  </div>
+ </div>
 </div>
 
 <script>

@@ -8,10 +8,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     try 
     {   
         $posted = true;
-        $namaMotor = $_POST["iNamaMotor"];
+        $tipe_2 = $_POST['iTipe_2'];
+        $stock = $_POST['iStock_update'];
         
-        $new_motor = "INSERT INTO motor (nama_motor) VALUES ('$namaMotor')";
-        pg_query($new_motor);
+        $new_stock = "UPDATE spareparts SET stock = stock + $stock WHERE id_tipe = $tipe_2";
+        $update_date = "INSERT INTO riwayat_restock (id_tipe,jumlah) VALUES ($tipe_2,$stock)";
+        pg_query($new_stock);
+        pg_query($update_date);
 
       
             echo ("<script>

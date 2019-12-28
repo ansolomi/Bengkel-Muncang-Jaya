@@ -9,20 +9,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     {   
         $posted = true;
         $namaMotor = $_POST["motorCompat"];
-        $jenis = $_POST["iJenis"];
-        $merk = $_POST["iMerk"];
-        $tipe = $_POST["iTipe"];
-        $harga = $_POST["iHarga"];
-        $stock = $_POST["iStock"];
+        $jenis = $_POST["spJenis"];
+        $merk = $_POST["spMerk"];
+        $tipe = $_POST["spTipe"];
+        $harga = $_POST["spHarga"];
+        $stock = $_POST["spStock"];
         
-        $new_sparepart = "INSERT INTO spareparts (jenis,merk,tipe,harga) VALUES ('$jenis','$merk','$tipe',$harga)";
-		$new_stock = "INSERT INTO stock(id_tipe, stock) VALUES ((SELECT id_tipe FROM spareparts WHERE jenis = $jenis AND merk = $merk AND tipe = $tipe AND harga = $harga), $stock)";
+        $new_sparepart = "INSERT INTO spareparts VALUES ('$jenis','$merk','$tipe','$stock','$harga')";
+		$update = "INSERT INTO riwayat_restock VALUES ('$tipe','$stock')";
         pg_query($new_sparepart);
-        pg_query($new_stock);
+		pg_query($update);
 		
             echo ("<script>
             alert('Data sudah tercatat');
-			window.location.href='insert_own.php';
+			window.location.href='#';
             </script>");
       
     }
@@ -33,3 +33,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 }
 ?>
+
+

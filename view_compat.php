@@ -61,9 +61,9 @@ require_once 'config.php';
 	  <div class"col">
 		  <form class="dropdown" id="right-panel-link" action="test_filter.php" method="post">
 					<select class="form-control" name="dd_opt">
-						<option value="id_tipe">ID Spareparts</option>
-						<option value="jenis">Jenis</option>
-            <option value="tipe">Tipe</option>
+						<option value="nama_jenis">Jenis</option>
+            <option value="nama_merk">Merk</option>
+            <option value="nama_tipe">Tipe</option>
             <option value="nama_motor">Nama Motor</option>
 					</select>
 		</div>
@@ -88,8 +88,8 @@ require_once 'config.php';
 <br>
 	<thead>
 		<tr>
-			<th>ID</th>
 			<th>Jenis</th>
+      <th>Merk</th>
       <th>Tipe</th>                     
       <th>Nama Motor</th>
 		 </tr>
@@ -124,24 +124,24 @@ require_once 'config.php';
     $search=$_GET['search_param'];
       if($select_by == 'id_tipe')
       {
-        $query = @pg_query("select id_tipe,jenis,tipe,nama_motor from compatibility WHERE ".$select_by." = ".$search." ORDER BY jenis ASC")or die(error); 
+        $query = @pg_query("select * FROM view_compatibility WHERE ".$select_by." = ".$search." ORDER BY nama_jenis ASC")or die(error); 
       }
       else
       {
-        $query = @pg_query("select id_tipe,jenis,tipe,nama_motor from compatibility WHERE ".$select_by." LIKE '%".$search."%' ORDER BY jenis ASC")or die(error);
+        $query = @pg_query("select * FROM view_compatibility WHERE ".$select_by." LIKE '%".$search."%' ORDER BY nama_jenis ASC")or die(error);
       }
     
   }
   else
   {
-  $query = pg_query("select id_tipe,jenis,tipe,nama_motor from compatibility ORDER BY jenis ASC LIMIT $halaman OFFSET $mulai")or die(error);
+  $query = pg_query("select * FROM view_compatibility ORDER BY nama_jenis ASC LIMIT $halaman OFFSET $mulai")or die(error);
   }
   while ($data = pg_fetch_assoc($query)) {
     ?>
     <tr>
-      <td><?php echo $data['id_tipe']; ?></td>                  
-      <td><?php echo $data['jenis']; ?></td>
-      <td><?php echo $data['tipe']; ?></td>
+      <td><?php echo $data['nama_jenis']; ?></td>
+      <td><?php echo $data['nama_merk']; ?></td>                  
+      <td><?php echo $data['nama_tipe']; ?></td>
       <td><?php echo $data['nama_motor']; ?></td>            
     </tr>
     <?php               
