@@ -10,28 +10,28 @@ INCREMENT 1
 MINVALUE 1001
 MAXVALUE 2000
 START 1001
-CACHE 1;
+CACHE 1001;
 
 CREATE SEQUENCE id_jenis
 INCREMENT 1
 MINVALUE 2001
 MAXVALUE 3000
 START 2001
-CACHE 1;
+CACHE 2001;
 
 CREATE SEQUENCE id_motor
 INCREMENT 1
 MINVALUE 3001
 MAXVALUE 4000
 START 3001
-CACHE 1;
+CACHE 3001;
 
 CREATE SEQUENCE id_transaksi
 INCREMENT 1
 MINVALUE 9000
 MAXVALUE 9999999
 START 9000
-CACHE 1;
+CACHE 9000;
 
 CREATE TABLE tipe 
 (id_tipe INT DEFAULT NEXTVAL('id_tipe') PRIMARY KEY,
@@ -64,7 +64,6 @@ CREATE TABLE riwayat_jual
 (id_transaksi INT DEFAULT NEXTVAL ('id_transaksi') PRIMARY KEY,
 id_tipe INT REFERENCES tipe(id_tipe),
 jumlah INT NOT NULL,
-total_pendapatan INT NOT NULL,
 tanggal TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP);
 
 CREATE TABLE riwayat_restock
@@ -72,22 +71,14 @@ CREATE TABLE riwayat_restock
 jumlah INT NOT NULL,
 tanggal TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP);
 
-CREATE TABLE login(
-id SERIAL NOT NULL,
-username VARCHAR(255) NOT NULL,
-password VARCHAR(255) NOT NULL);
-
-INSERT INTO login (username,password) VALUES
-('admin','912ec803b2ce49e4a541068d495ab570');
-
-\COPY tipe (nama_tipe) FROM 'C:\tipe.csv' DELIMITER ',' CSV HEADER;
-\COPY merk (nama_merk) FROM 'C:\merk.csv' DELIMITER ',' CSV HEADER;
-\COPY jenis (nama_jenis) FROM 'C:\jenis.csv' DELIMITER ',' CSV HEADER;
-\COPY motor (nama_motor) FROM 'C:\motor.csv' DELIMITER ',' CSV HEADER;
-\COPY spareparts FROM 'C:\spareparts.csv' DELIMITER ',' CSV HEADER;
-\COPY compatibility FROM 'C:\compatibility.csv' DELIMITER ',' CSV HEADER;
-\COPY riwayat_jual (id_tipe,riwayat,total_pendapatan) FROM 'C:\sales.csv' DELIMITER ',' CSV HEADER;
-\COPY riwayat_restock (id_tipe,jumlah) FROM 'C:\restock.csv' DELIMITER ',' CSV HEADER;
+\COPY tipe (nama_tipe) FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\tipe.csv' DELIMITER ',' CSV HEADER;
+\COPY merk (nama_merk) FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\merk.csv' DELIMITER ',' CSV HEADER;
+\COPY jenis (nama_jenis) FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\jenis.csv' DELIMITER ',' CSV HEADER;
+\COPY motor (nama_motor) FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\motor.csv' DELIMITER ',' CSV HEADER;
+\COPY spareparts FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\spareparts.csv' DELIMITER ',' CSV HEADER;
+\COPY compatibility FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\compatibility.csv' DELIMITER ',' CSV HEADER;
+\COPY riwayat_jual (id_tipe,jumlah) FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\sales.csv' DELIMITER ',' CSV HEADER;
+\COPY riwayat_restock (id_tipe,jumlah) FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\restock.csv' DELIMITER ',' CSV HEADER;
 
 
 CREATE OR REPLACE FUNCTION func_tipe()
@@ -154,7 +145,7 @@ INNER JOIN merk ON spareparts.id_merk = merk.id_merk
 INNER JOIN tipe ON spareparts.id_tipe = tipe.id_tipe;
 
 CREATE VIEW view_jual AS
-SELECT nama_jenis, nama_merk, nama_tipe, jumlah, total_pendapatan, tanggal FROM
+SELECT nama_jenis, nama_merk, nama_tipe, jumlah, harga AS satuan, (harga*jumlah) AS total, tanggal FROM
 riwayat_jual NATURAL JOIN tipe 
 NATURAL JOIN spareparts
 INNER JOIN jenis ON spareparts.id_jenis = jenis.id_jenis
@@ -166,3 +157,7 @@ riwayat_restock NATURAL JOIN tipe
 NATURAL JOIN spareparts
 INNER JOIN jenis ON spareparts.id_jenis = jenis.id_jenis
 INNER JOIN merk ON spareparts.id_merk = merk.id_merk;
+
+CREATE VIEW preview_jual AS
+SELECT id_tipe, jenis.nama_jenis, merk.nama_merk, tipe.nama_tipe, stock, harga
+FROM spareparts NATURAL JOIN jenis NATURAL JOIN tipe NATURAL JOIN merk;
