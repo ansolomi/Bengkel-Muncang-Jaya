@@ -50,19 +50,19 @@ CREATE TABLE motor
 nama_motor VARCHAR(255) NOT NULL UNIQUE);
 
 CREATE TABLE spareparts
-(id_jenis INT REFERENCES jenis(id_jenis),
-id_merk INT REFERENCES merk(id_merk),
-id_tipe INT REFERENCES tipe(id_tipe),
+(id_jenis INT REFERENCES jenis(id_jenis) NOT NULL,
+id_merk INT REFERENCES merk(id_merk) NOT NULL,
+id_tipe INT REFERENCES tipe(id_tipe) UNIQUE NOT NULL,
 stock INT NOT NULL,
 harga INT NOT NULL);
 
 CREATE TABLE compatibility
-(id_tipe INT REFERENCES tipe(id_tipe),
-id_motor INT REFERENCES motor(id_motor));
+(id_tipe INT REFERENCES tipe(id_tipe) NOT NULL,
+id_motor INT REFERENCES motor(id_motor)) NOT NULL;
 
 CREATE TABLE riwayat_jual
-(id_transaksi INT DEFAULT txid_current(),
-id_tipe INT REFERENCES tipe(id_tipe),
+(id_transaksi INT DEFAULT txid_current() NOT NULL,
+id_tipe INT REFERENCES tipe(id_tipe) NOT NULL,
 jumlah INT NOT NULL,
 tanggal TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP);
 
@@ -152,7 +152,7 @@ INNER JOIN merk ON spareparts.id_merk = merk.id_merk
 INNER JOIN tipe ON spareparts.id_tipe = tipe.id_tipe;
 
 CREATE VIEW view_jual AS
-SELECT nama_jenis, nama_merk, nama_tipe, jumlah, harga AS satuan, (harga*jumlah) AS total, tanggal FROM
+SELECT id_transaksi,nama_jenis, nama_merk, nama_tipe, jumlah, harga AS satuan, (harga*jumlah) AS total, tanggal FROM
 riwayat_jual NATURAL JOIN tipe 
 NATURAL JOIN spareparts
 INNER JOIN jenis ON spareparts.id_jenis = jenis.id_jenis
