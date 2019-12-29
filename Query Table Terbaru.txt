@@ -61,7 +61,7 @@ CREATE TABLE compatibility
 id_motor INT REFERENCES motor(id_motor));
 
 CREATE TABLE riwayat_jual
-(id_transaksi INT DEFAULT NEXTVAL ('id_transaksi') PRIMARY KEY,
+(id_transaksi INT DEFAULT txid_current(),
 id_tipe INT REFERENCES tipe(id_tipe),
 jumlah INT NOT NULL,
 tanggal TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP);
@@ -80,14 +80,14 @@ INSERT INTO login (username,password) VALUES
 ('admin','912ec803b2ce49e4a541068d495ab570');
 
 
-\COPY tipe (nama_tipe) FROM 'C:\tipe.csv' DELIMITER ',' CSV HEADER;
-\COPY merk (nama_merk) FROM 'C:\merk.csv' DELIMITER ',' CSV HEADER;
-\COPY jenis (nama_jenis) FROM 'C:\jenis.csv' DELIMITER ',' CSV HEADER;
-\COPY motor (nama_motor) FROM 'C:\motor.csv' DELIMITER ',' CSV HEADER;
-\COPY spareparts FROM 'C:\spareparts.csv' DELIMITER ',' CSV HEADER;
-\COPY compatibility FROM 'C:\compatibility.csv' DELIMITER ',' CSV HEADER;
-\COPY riwayat_jual (id_tipe,jumlah) FROM 'C:\sales.csv' DELIMITER ',' CSV HEADER;
-\COPY riwayat_restock (id_tipe,jumlah) FROM 'C:\restock.csv' DELIMITER ',' CSV HEADER;
+\COPY tipe (nama_tipe) FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\tipe.csv' DELIMITER ',' CSV HEADER;
+\COPY merk (nama_merk) FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\merk.csv' DELIMITER ',' CSV HEADER;
+\COPY jenis (nama_jenis) FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\jenis.csv' DELIMITER ',' CSV HEADER;
+\COPY motor (nama_motor) FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\motor.csv' DELIMITER ',' CSV HEADER;
+\COPY spareparts FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\spareparts.csv' DELIMITER ',' CSV HEADER;
+\COPY compatibility FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\compatibility.csv' DELIMITER ',' CSV HEADER;
+\COPY riwayat_jual (id_tipe,jumlah) FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\sales.csv' DELIMITER ',' CSV HEADER;
+\COPY riwayat_restock (id_tipe,jumlah) FROM 'C:\users\ikhsan f\desktop\materi\term 5\sbd\proj_sbd\update table sbd\restock.csv' DELIMITER ',' CSV HEADER;
 
 
 CREATE OR REPLACE FUNCTION func_tipe()
