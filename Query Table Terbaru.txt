@@ -140,7 +140,7 @@ BEFORE
 
 
 CREATE VIEW complete_list AS
-SELECT jenis.nama_jenis, merk.nama_merk, tipe.nama_tipe, stock, harga
+SELECT spareparts.id_tipe,jenis.nama_jenis, merk.nama_merk, tipe.nama_tipe, stock, harga
 FROM spareparts NATURAL JOIN jenis NATURAL JOIN tipe NATURAL JOIN merk;
 
 CREATE VIEW view_compatibility AS
